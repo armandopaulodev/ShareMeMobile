@@ -126,12 +126,13 @@ export default function App() {
           </Card>
         </ScrollView>
         <Portal>
-          <Dialog visible={visible} onDismiss={hideDialog}>
-            <Dialog.Title>Alert</Dialog.Title>
+          <Dialog visible={visible} onDismiss={hideDialog} style={{ backgroundColor:'red' }}>
+            <Dialog.Title>Alerta de Bateria fraca</Dialog.Title>
             <Dialog.Content>
-              <Text variant="bodyMedium">This is simple dialog</Text>
+              <Text variant="bodyMedium">Apenas um exemplo de modal</Text>
             </Dialog.Content>
             <Dialog.Actions>
+               <Button onPress={hideDialog}>Cancelar</Button>
               <Button onPress={hideDialog}>Done</Button>
             </Dialog.Actions>
           </Dialog>
