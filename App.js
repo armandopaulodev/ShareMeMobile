@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import { useMaterial3Theme } from "@pchmn/expo-material3-theme";
 import * as React from "react";
 import {
