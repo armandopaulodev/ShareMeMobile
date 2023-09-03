@@ -96,6 +96,7 @@ export default function Home({ navigation }) {
                     numColumns={2}
                     renderItem={renderItem}
                     keyExtractor={(item) => item.id}
+                    scrollEnabled={false}
                 />
 
                 <DataTableComponent />
