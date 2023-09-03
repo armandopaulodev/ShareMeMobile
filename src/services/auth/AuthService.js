@@ -55,15 +55,8 @@ class AuthService {
     
           if (response.status === 200) {
             const data = await response.json();
-            // const token = data.token; 
-
-            console.log(data);
-    
-            if (token) {
-              // Store the token and return true
-            //   await AuthService.setAuthToken(token);
-              return true;
-            }
+            // console.log(data);
+            return true;
           }
     
           // If login fails, return false

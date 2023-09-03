@@ -22,9 +22,15 @@ export default function Login({navigation}) {
         }
 
         setIslogin(true);   
-       const res =  await AuthService.login(data);
+       const res =  await AuthService.login(data); 
 
-       console.log(res);
+       if (res==true) {
+            setIslogin(false);
+            navigation.navigate('home');
+       }{
+           setIslogin(false);
+       }
+
     }
     return (
         <View style={{ flex: 1, justifyContent: 'center', padding: 35, top:-50 }}>
