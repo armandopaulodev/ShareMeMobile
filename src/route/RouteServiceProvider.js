@@ -29,13 +29,16 @@ export default function RouteServiceProvider(){
       <Stack.Navigator>
          {authenticated ? (
           <>
-            <Stack.Screen name="Home" component={Home}  options={{ headerShown: false }}/>
+            <Stack.Screen name="home" component={Home}  options={{ headerShown: false }}/>
           </>
         ) : (
           <>
-            <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
+            <Stack.Screen name="login" component={Login} options={{ headerShown: false }}/>
           </>
         )}
+        
+        <Stack.Screen name="home" component={Home}  options={{ headerShown: false }}/>
+
         </Stack.Navigator>
   );
 };

@@ -1,5 +1,5 @@
-import React from "react";
 import "react-native-gesture-handler";
+import React from "react";
 import { ThemeContextProvider } from "./src/context/ThemeContext";
 import RouteServiceProvider from "./src/route/RouteServiceProvider";
 
