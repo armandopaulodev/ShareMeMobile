@@ -22,13 +22,9 @@ export default function Login({navigation}) {
         }
 
         setIslogin(true);   
-        await AuthService.login(data).then(res => {
-            console.log(res);
-            setIslogin(false);
-            navigation.navigate('home');
-        }).catch((err) => {
-           
-        });
+       const res =  await AuthService.login(data);
+
+       console.log(res);
     }
     return (
         <View style={{ flex: 1, justifyContent: 'center', padding: 35, top:-50 }}>

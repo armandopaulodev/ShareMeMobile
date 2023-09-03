@@ -40,22 +40,39 @@ class AuthService {
     }
 
     static async login(user) {
+        try {
+          const response = await fetch(base_url + 'api/login', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: user.email,
+              password: user.password,
+            }),
+          });
+    
+          if (response.status === 200) {
+            const data = await response.json();
+            // const token = data.token; 
 
-     return  await fetch(base_url+'api/login',
-            {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    'email': user.email,
-                    'password': user.password
-                }),
-
+            console.log(data);
+    
+            if (token) {
+              // Store the token and return true
+            //   await AuthService.setAuthToken(token);
+              return true;
             }
-        )
-    }
+          }
+    
+          // If login fails, return false
+          return false;
+        } catch (error) {
+          console.error('Error logging in:', error);
+          return false;
+        }
+      }
 }
 
 export default AuthService;
