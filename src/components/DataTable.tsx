@@ -16,7 +16,7 @@ const DataTableComponent = () => {
     {
       key: 1,
       name: 'Cupcake',
-      calories: 356,
+      calories: '12/08/2023 12:34',
       fat: 16,
     },
     {
@@ -62,9 +62,9 @@ const DataTableComponent = () => {
         borderColor: theme.colors.secondary, padding: 20, borderRadius: 5
       }}>
         <DataTable.Header>
-          <DataTable.Title>Dessert</DataTable.Title>
-          <DataTable.Title numeric>Calories</DataTable.Title>
-          <DataTable.Title numeric>Fat</DataTable.Title>
+          <DataTable.Title>Ficheiros</DataTable.Title>
+          <DataTable.Title numeric>Data.Upload</DataTable.Title>
+          <DataTable.Title numeric>Baixar</DataTable.Title>
         </DataTable.Header>
 
         {items.slice(from, to).map((item) => (

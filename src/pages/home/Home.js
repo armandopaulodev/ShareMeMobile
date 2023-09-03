@@ -5,6 +5,7 @@ import { useTheme } from "../../context/ThemeContext";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 import { ScrollView, View, Text, FlatList, StyleSheet } from 'react-native';
 import DataTableComponent from "../../components/DataTable";
+import { Plane, Swing, Fold, Wave, Wander,Pulse, Circle, CircleFade, Flow, Grid } from 'react-native-animated-spinkit'
 
 export default function Home({ navigation }) {
     const [visible, setVisible] = React.useState(false);
@@ -67,7 +68,9 @@ export default function Home({ navigation }) {
             />
             
             <DataTableComponent />
-
+            <Text style={{ textAlign: 'center', marginTop: 100 }} onPress={toggleThemeType}>
+                            <Wave size={120} color={theme.colors.primary} />
+                        </Text>
             </ScrollView>
         </View>
     );
