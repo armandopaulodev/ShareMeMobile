@@ -2,6 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { Appbar, Avatar, Button } from "react-native-paper";
 import { useTheme } from "../../context/ThemeContext";
+import AuthService from "../../services/auth/AuthService";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 export default function Home({navigation}) {
@@ -15,7 +16,7 @@ export default function Home({navigation}) {
   return (
     <View>
       <Button mode="elevated" onPress={()=>{
-        navigation.navigate('login')
+        AuthService.getAuthToken();
       }}>Login</Button>
     </View>
   );

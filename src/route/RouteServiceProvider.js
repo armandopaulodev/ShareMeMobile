@@ -53,7 +53,7 @@ export default function RouteServiceProvider() {
                 </>
             )}
 
-            <Stack.Screen name="home" component={Home} />
+            <Stack.Screen name="/" component={Home} />
 
         </Stack.Navigator>
     );
