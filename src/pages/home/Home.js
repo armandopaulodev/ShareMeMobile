@@ -14,15 +14,6 @@ export default function Home({navigation}) {
 
   return (
     <View>
-      <Appbar.Header>
-        <Appbar.Content title="Home" />
-        <Appbar.Action icon="calendar" onPress={() => {}}/>
-        <Appbar.Action
-          icon={isDarkTheme ? "moon-waning-crescent" : "white-balance-sunny"}
-          onPress={toggleThemeType}
-        />
-      </Appbar.Header>
-
       <Button mode="elevated" onPress={()=>{
         navigation.navigate('login')
       }}>Login</Button>
