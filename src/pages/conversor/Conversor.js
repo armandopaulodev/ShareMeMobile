@@ -1,38 +1,47 @@
 
 import React, { useState } from "react";
 import { View } from "react-native";
-import { Text } from "react-native-paper";
+import { Button, Text } from "react-native-paper";
 import { useTheme } from "../../context/ThemeContext";
 import AuthService from "../../services/auth/AuthService";
+import * as DocumentPicker from 'expo-document-picker';
+import { Wave } from 'react-native-animated-spinkit'
 
-export default function Conversor({navigation}) {
+export default function Conversor({ navigation }) {
     const { toggleThemeType, themeType, isDarkTheme, theme } = useTheme();
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [isLogin, setIslogin] = useState(false);
+    const [pickedDocument, setPickedDocument] = useState(null);
+    const [converting, setConverting]=useState(false);
 
+    const pickDocument = async () => {
 
-    const userLogin = async () => {
-
-        let data = {
-            'email': username,
-            'password': password
+        try {
+            const result = await DocumentPicker.getDocumentAsync({
+                type: '*/*', // You can specify the MIME type or use '*' to allow any file type.
+            });
+            if (result.canceled === false) {
+                setPickedDocument(result.assets[0]);
+            } else {
+                console.log('Document picking canceled.');
+            }
+        } catch (err) {
+            console.error('Error picking document:', err);
         }
-
-        setIslogin(true);   
-       const res =  await AuthService.login(data); 
-
-       if (res==true) {
-            setIslogin(false);
-            navigation.navigate('home');
-       }{
-           setIslogin(false);
-       }
-
     }
+
     return (
-        <View style={{ textAlign:'center' }}>
-            <Text style={{ textAlign: 'center', fontWeight: 'bold', color: theme.colors.primary }} onPress={toggleThemeType}>Conversao disponivel</Text>
+        <View style={{ justifyContent: 'center', padding: 10, marginLeft: 10 }}>
+           
+            <Button mode="contained" onPress={() => pickDocument()}>Carregar documento (.docx)</Button>
+
+            {pickedDocument && (
+                <View style={{ marginTop:10 }}>
+                    <Text style={{ fontWeight:'bold' }}>Nome do Documento: {pickedDocument.name}</Text>
+                </View>
+            )}
+
+            {/* <Text style={{ textAlign: 'center', marginTop: 100 }} onPress={toggleThemeType}>
+                <Wave size={200} color={theme.colors.primary} />
+            </Text> */}
         </View>
     );
 };
