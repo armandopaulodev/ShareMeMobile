@@ -20,11 +20,14 @@ export default function Header({ navigation, route, options, back }) {
     <Appbar.Header>
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
       <Appbar.Content title={title} />
-      <Appbar.Action
-        icon={isDarkTheme ? "moon-waning-crescent" : "white-balance-sunny"}
-        onPress={toggleThemeType}
-      />
-      {!back ? (
+      {
+        !back? (
+          <Appbar.Action
+          icon={isDarkTheme ? "moon-waning-crescent" : "white-balance-sunny"}
+          onPress={toggleThemeType}
+        />
+        ) : null
+      }     
         <Menu
           visible={visible}
           onDismiss={closeMenu}
@@ -54,7 +57,8 @@ export default function Header({ navigation, route, options, back }) {
             disabled
           />
         </Menu>
-      ) : null}
+
+    
     </Appbar.Header>
   );
 };

@@ -6,6 +6,7 @@ import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import AuthService from "../services/auth/AuthService";
 import Header from "../components/Header";
+import Conversor from "../pages/conversor/Conversor";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 
@@ -54,6 +55,7 @@ export default function RouteServiceProvider() {
             )}
 
             <Stack.Screen name="/" component={Home} />
+            <Stack.Screen name="conversor" component={Conversor} />
 
         </Stack.Navigator>
     );
