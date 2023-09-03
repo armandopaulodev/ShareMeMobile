@@ -1,13 +1,27 @@
-import React from "react";
-import { Avatar, Card, Button } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React, { useRef, useState, useEffect } from "react";
+import { FlatList, ScrollView, Text, View } from 'react-native';
+import { Wave } from 'react-native-animated-spinkit';
+import { Avatar, Button, Card } from "react-native-paper";
+import DataTableComponent from "../../components/DataTable";
 import { useTheme } from "../../context/ThemeContext";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
-import { ScrollView, View, Text, FlatList, StyleSheet } from 'react-native';
-import DataTableComponent from "../../components/DataTable";
-import { Plane, Swing, Fold, Wave, Wander,Pulse, Circle, CircleFade, Flow, Grid } from 'react-native-animated-spinkit'
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
+
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: false,
+        shouldSetBadge: false,
+    }),
+});
 
 export default function Home({ navigation }) {
+    const [expoPushToken, setExpoPushToken] = useState('');
+    const [notification, setNotification] = useState(false);
+    const notificationListener = useRef();
+    const responseListener = useRef();
+
     const [visible, setVisible] = React.useState(false);
 
     const showDialog = () => setVisible(true);
@@ -52,6 +66,23 @@ export default function Home({ navigation }) {
 
     ];
 
+    useEffect(() => {
+        registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+
+        notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+            setNotification(notification);
+        });
+
+        responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+            console.log(response);
+        });
+
+        return () => {
+            Notifications.removeNotificationSubscription(notificationListener.current);
+            Notifications.removeNotificationSubscription(responseListener.current);
+        };
+    }, []);
+
     const renderItem = ({ item }) => (
         <View style={{ width: '50%', marginBottom: 20 }}>
             <Text>{item.title}</Text>
@@ -60,19 +91,81 @@ export default function Home({ navigation }) {
     return (
         <View style={{ flex: 1, justifyContent: 'center', padding: 5, marginLeft: 10 }}>
             <ScrollView>
-            <FlatList
-                data={data}
-                numColumns={2}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id}
-            />
-            
-            <DataTableComponent />
-            <Text style={{ textAlign: 'center', marginTop: 100 }} onPress={toggleThemeType}>
-                            <Wave size={120} color={theme.colors.primary} />
-                        </Text>
+                <FlatList
+                    data={data}
+                    numColumns={2}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.id}
+                />
+
+                <DataTableComponent />
+                {/* <Text style={{ textAlign: 'center', marginTop: 100 }} onPress={toggleThemeType}>
+                    <Wave size={120} color={theme.colors.primary} />
+                </Text> */}
+                <View
+                    style={{
+                        flex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'space-around',
+                    }}>
+                    <Text>Your expo push token: {expoPushToken}</Text>
+                    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                        <Text>Title: {notification && notification.request.content.title} </Text>
+                        <Text>Body: {notification && notification.request.content.body}</Text>
+                        <Text>Data: {notification && JSON.stringify(notification.request.content.data)}</Text>
+                    </View>
+                    <Button mode="elevated"
+                        onPress={async () => {
+                            await schedulePushNotification();
+                        }}
+                    >Nofify</Button>
+                </View>
             </ScrollView>
         </View>
     );
 };
 
+async function schedulePushNotification() {
+    await Notifications.scheduleNotificationAsync({
+        content: {
+            title: "You've got mail! 📬",
+            body: 'Here is the notification body',
+            data: { data: 'goes here' },
+        },
+        trigger: { seconds: 1 },
+    });
+}
+
+async function registerForPushNotificationsAsync() {
+    let token;
+
+    if (Platform.OS === 'android') {
+        await Notifications.setNotificationChannelAsync('default', {
+            name: 'default',
+            importance: Notifications.AndroidImportance.MAX,
+            vibrationPattern: [0, 250, 250, 250],
+            lightColor: '#FF231F7C',
+        });
+    }
+
+    if (Device.isDevice) {
+        const { status: existingStatus } = await Notifications.getPermissionsAsync();
+        let finalStatus = existingStatus;
+        if (existingStatus !== 'granted') {
+            const { status } = await Notifications.requestPermissionsAsync();
+            finalStatus = status;
+        }
+        if (finalStatus !== 'granted') {
+            alert('Failed to get push token for push notification!');
+            return;
+        }
+        // Learn more about projectId:
+        // https://docs.expo.dev/push-notifications/push-notifications-setup/#configure-projectid
+        token = (await Notifications.getExpoPushTokenAsync({ projectId: 'your-project-id' })).data;
+        console.log(token);
+    } else {
+        alert('Must use physical device for Push Notifications');
+    }
+
+    return token;
+}
