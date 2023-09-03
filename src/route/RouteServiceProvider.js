@@ -5,7 +5,7 @@ import { Avatar } from "react-native-paper";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import AuthService from "../services/auth/AuthService";
-import Header from "../components/header";
+import Header from "../components/Header";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 
