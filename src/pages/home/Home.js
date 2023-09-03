@@ -48,32 +48,27 @@ export default function Home({ navigation }) {
                     </Card.Content>
                 </Card>
         },
-        
+
     ];
 
     const renderItem = ({ item }) => (
-        <View style={{ width: '50%', marginBottom:20 }}>
+        <View style={{ width: '50%', marginBottom: 20 }}>
             <Text>{item.title}</Text>
         </View>
     );
     return (
-        <View style={{ flex: 1, justifyContent: 'center', padding: 5, marginLeft:10 }}>
+        <View style={{ flex: 1, justifyContent: 'center', padding: 5, marginLeft: 10 }}>
+            <ScrollView>
             <FlatList
                 data={data}
                 numColumns={2}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
             />
-   <View style={{ flexDirection: 'row', justifyContent: 'space-between', top: -250 }}>
-   <Text style={{ fontWeight:'bold', color: theme.colors.primary }}>
-    Seus uploads recentes
-  </Text>
-  <Button icon="book-play-outline" mode="outlined"  onPress={() => console.log('Pressed')}>
-    Minhas Turmas
-  </Button>
-    </View>
-            <DataTableComponent/>
-           
+            
+            <DataTableComponent />
+
+            </ScrollView>
         </View>
     );
 };

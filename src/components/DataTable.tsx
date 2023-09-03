@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { DataTable } from 'react-native-paper';
+import { DataTable, Text, Button } from 'react-native-paper';
+import { useTheme } from '../context/ThemeContext';
+import { View } from 'react-native';
 
 const DataTableComponent = () => {
   const [page, setPage] = React.useState<number>(0);
@@ -8,31 +10,33 @@ const DataTableComponent = () => {
     numberOfItemsPerPageList[0]
   );
 
+  const { toggleThemeType, themeType, isDarkTheme, theme } = useTheme();
+
   const [items] = React.useState([
-   {
-     key: 1,
-     name: 'Cupcake',
-     calories: 356,
-     fat: 16,
-   },
-   {
-     key: 2,
-     name: 'Eclair',
-     calories: 262,
-     fat: 16,
-   },
-   {
-     key: 3,
-     name: 'Frozen yogurt',
-     calories: 159,
-     fat: 6,
-   },
-   {
-     key: 4,
-     name: 'Gingerbread',
-     calories: 305,
-     fat: 3.7,
-   },
+    {
+      key: 1,
+      name: 'Cupcake',
+      calories: 356,
+      fat: 16,
+    },
+    {
+      key: 2,
+      name: 'Eclair',
+      calories: 262,
+      fat: 16,
+    },
+    {
+      key: 3,
+      name: 'Frozen yogurt',
+      calories: 159,
+      fat: 6,
+    },
+    {
+      key: 4,
+      name: 'Gingerbread',
+      calories: 305,
+      fat: 3.7,
+    },
   ]);
 
   const from = page * itemsPerPage;
@@ -43,33 +47,49 @@ const DataTableComponent = () => {
   }, [itemsPerPage]);
 
   return (
-    <DataTable style={{ top:-250 }}>
-      <DataTable.Header>
-        <DataTable.Title>Dessert</DataTable.Title>
-        <DataTable.Title numeric>Calories</DataTable.Title>
-        <DataTable.Title numeric>Fat</DataTable.Title>
-      </DataTable.Header>
+    <View style={{ marginBottom:3, marginTop:20 }}>
+      <View style={{ flexDirection:'row', justifyContent:'space-between', marginBottom: 4 }}>
+      <Text style={{ fontWeight: 'bold', color: theme.colors.secondary }}>
+        Seus uploads recentes
+      </Text>
+      <Button icon="book-play-outline" mode="outlined" onPress={() => console.log('Pressed')}>
+        Minhas Turmas
+      </Button>
+      </View>
+      <DataTable style={{
+        
+        borderWidth: 0.2, shadowColor: theme.colors.secondary,
+        borderColor: theme.colors.secondary, padding: 20, borderRadius: 5
+      }}>
+        <DataTable.Header>
+          <DataTable.Title>Dessert</DataTable.Title>
+          <DataTable.Title numeric>Calories</DataTable.Title>
+          <DataTable.Title numeric>Fat</DataTable.Title>
+        </DataTable.Header>
 
-      {items.slice(from, to).map((item) => (
-        <DataTable.Row key={item.key}>
-          <DataTable.Cell>{item.name}</DataTable.Cell>
-          <DataTable.Cell numeric>{item.calories}</DataTable.Cell>
-          <DataTable.Cell numeric>{item.fat}</DataTable.Cell>
-        </DataTable.Row>
-      ))}
+        {items.slice(from, to).map((item) => (
+          <DataTable.Row key={item.key}>
+            <DataTable.Cell>{item.name}</DataTable.Cell>
+            <DataTable.Cell numeric>{item.calories}</DataTable.Cell>
+            <DataTable.Cell numeric>{item.fat}</DataTable.Cell>
+          </DataTable.Row>
+        ))}
 
-      <DataTable.Pagination
-        page={page}
-        numberOfPages={Math.ceil(items.length / itemsPerPage)}
-        onPageChange={(page) => setPage(page)}
-        label={`${from + 1}-${to} of ${items.length}`}
-        numberOfItemsPerPageList={numberOfItemsPerPageList}
-        numberOfItemsPerPage={itemsPerPage}
-        onItemsPerPageChange={onItemsPerPageChange}
-        showFastPaginationControls
-        selectPageDropdownLabel={'Rows per page'}
-      />
-    </DataTable>
+        <DataTable.Pagination
+          page={page}
+          numberOfPages={Math.ceil(items.length / itemsPerPage)}
+          onPageChange={(page) => setPage(page)}
+          label={`${from + 1}-${to} de ${items.length}`}
+          numberOfItemsPerPageList={numberOfItemsPerPageList}
+          numberOfItemsPerPage={itemsPerPage}
+          onItemsPerPageChange={onItemsPerPageChange}
+          showFastPaginationControls
+          selectPageDropdownLabel={'Por pagina'}
+        />
+      </DataTable>
+    </View>
+
+
   );
 };
 
