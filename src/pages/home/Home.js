@@ -29,42 +29,7 @@ export default function Home({ navigation }) {
     const hideDialog = () => setVisible(false);
     const { toggleThemeType, themeType, isDarkTheme, theme } = useTheme();
 
-    const data = [
-        {
-            id: '1',
-            title:
-                <Card>
-                    <Card.Content>
-                        <Button icon={{ source: "newspaper-variant-multiple-outline", direction: 'rtl' }}>
-                            Criar Turma
-                        </Button>
-                    </Card.Content>
-                </Card>
-        },
-        {
-            id: '2',
-            title:
-                <Card onPress={()=>navigation.navigate('conversor')}>
-                    <Card.Content>
-                        <Button icon={{ source: "autorenew", direction: 'rtl' }}>
-                            Conversor
-                        </Button>
-                    </Card.Content>
-                </Card>
-        },
-        {
-            id: '3',
-            title:
-                <Card>
-                    <Card.Content>
-                        <Button icon={{ source: "monitor-share", direction: 'rtl' }}>
-                            Gerar e compartilhar
-                        </Button>
-                    </Card.Content>
-                </Card>
-        },
 
-    ];
 
     useEffect(() => {
         registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
@@ -89,27 +54,41 @@ export default function Home({ navigation }) {
         </View>
     );
     return (
-        <View style={{ flex: 1, justifyContent: 'center', padding: 5, marginLeft: 10 }}>
+        <View style={{ flex: 1, justifyContent: 'center', padding: 5, marginLeft: 5 }}>
             <ScrollView>
-                <FlatList
-                    data={data}
-                    numColumns={2}
-                    renderItem={renderItem}
-                    keyExtractor={(item) => item.id}
-                    scrollEnabled={false}
-                />
-
+      
+                <Card collapsable={true} style={{ marginBottom:15 }}>
+                    <Card.Content>
+                        <Button icon={{ source: "newspaper-variant-multiple-outline", direction: 'rtl' }}>
+                            Nova Turma
+                        </Button>
+                    </Card.Content>
+                </Card>
+                <Card onPress={() => navigation.navigate('conversor')} style={{ marginBottom:15 }}>
+                    <Card.Content>
+                        <Button icon={{ source: "autorenew", direction: 'rtl' }}>
+                            Conversor
+                        </Button>
+                    </Card.Content>
+                </Card>
+                <Card style={{ marginBottom:15 }}>
+                    <Card.Content>
+                        <Button icon={{ source: "monitor-share", direction: 'rtl' }}>
+                            Gerar e compartilhar
+                        </Button>
+                    </Card.Content>
+                </Card>
                 <DataTableComponent />
-                {/* <Text style={{ textAlign: 'center', marginTop: 100 }} onPress={toggleThemeType}>
+                <Text style={{ textAlign: 'center', marginTop: 100 }} onPress={toggleThemeType}>
                     <Wave size={120} color={theme.colors.primary} />
-                </Text> */}
+                </Text>
                 <View
                     style={{
                         flex: 1,
                         alignItems: 'center',
                         justifyContent: 'space-around',
                     }}>
-                   
+
                     <Button mode="elevated"
                         onPress={async () => {
                             await schedulePushNotification();
