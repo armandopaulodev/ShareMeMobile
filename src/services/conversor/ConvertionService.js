@@ -27,7 +27,7 @@ class ConvertionService {
         body: formData,
       }).then(res => res.json());
 
-      console.log(response)
+      return response;
     } catch (error) {
       console.error('Error storing token:', error);
     }

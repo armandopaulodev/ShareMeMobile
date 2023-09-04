@@ -13,15 +13,26 @@ export default function Conversor({ navigation }) {
     const [pickedDocument, setPickedDocument] = useState(null);
     const [converting, setConverting]=useState(false);
 
-    const pickDocument = async () => {
+    const delay = ms => new Promise(
+        resolve => setTimeout(resolve, ms)
+    );
 
+    const pickDocument = async () => {
+        
         try {
             const result = await DocumentPicker.getDocumentAsync({
                 type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
             });
             if (result.canceled === false) {
+                setConverting(true); //enable spinner if picked
                 setPickedDocument(result.assets[0]);
-                const convertion = ConvertionService.wordToPdf(result.assets[0]);
+                 ConvertionService.wordToPdf(result.assets[0]).then((response)=>{
+                    if (response.status === 200) {
+                         delay(4000).then(()=>{
+                            setConverting(false) //stop spinner
+                         })
+                      }
+                 })         
             } else {
                 console.log('Document picking canceled.');
             }
@@ -56,6 +67,7 @@ export default function Conversor({ navigation }) {
                 </Text>
                 </> :''
             }
+          
         </View>
     );
 };
