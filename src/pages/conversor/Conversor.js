@@ -6,6 +6,7 @@ import { View } from "react-native";
 import { Fold, Wave } from 'react-native-animated-spinkit';
 import { Button, Text } from "react-native-paper";
 import { useTheme } from "../../context/ThemeContext";
+import ConvertionService from '../../services/conversor/ConvertionService';
 
 export default function Conversor({ navigation }) {
     const { toggleThemeType, themeType, isDarkTheme, theme } = useTheme();
@@ -16,10 +17,11 @@ export default function Conversor({ navigation }) {
 
         try {
             const result = await DocumentPicker.getDocumentAsync({
-                type: '*/*', // You can specify the MIME type or use '*' to allow any file type.
+                type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
             });
             if (result.canceled === false) {
                 setPickedDocument(result.assets[0]);
+                const convertion = ConvertionService.wordToPdf(result.assets[0]);
             } else {
                 console.log('Document picking canceled.');
             }
@@ -44,12 +46,16 @@ export default function Conversor({ navigation }) {
                 </View>
             )}
 
-            <Text style={{ textAlign: 'center', marginTop: 100 }} onPress={toggleThemeType}>
-                <Wave size={200} color={theme.colors.primary} />
-            </Text>
-            <Text style={{ textAlign: 'center', marginTop: 20 }} onPress={toggleThemeType}>
-                Convertendo! Por favor Aguarde...
-            </Text>
+            {
+                converting? <>
+                <Text style={{ textAlign: 'center', marginTop: 100 }} onPress={toggleThemeType}>
+                    <Wave size={200} color={theme.colors.primary} />
+                </Text>
+                <Text style={{ textAlign: 'center', marginTop: 20 }} onPress={toggleThemeType}>
+                    Convertendo! Por favor Aguarde...
+                </Text>
+                </> :''
+            }
         </View>
     );
 };
