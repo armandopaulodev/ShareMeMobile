@@ -54,8 +54,9 @@ export default function RouteServiceProvider() {
                 </>
             )}
 
-            <Stack.Screen name="/" component={Home} />
-            <Stack.Screen name="conversor" component={Conversor} />
+            <Stack.Screen name="ShareMe" component={Home} />
+            <Stack.Screen name="out" component={Login} options={{ headerShown: false }} />
+            <Stack.Screen name="Conversor" component={Conversor} />
 
         </Stack.Navigator>
     );

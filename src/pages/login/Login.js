@@ -26,7 +26,7 @@ export default function Login({navigation}) {
 
        if (res==true) {
             setIslogin(false);
-            navigation.navigate('home');
+            navigation.navigate('ShareMe');
        }{
            setIslogin(false);
        }

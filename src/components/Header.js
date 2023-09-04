@@ -1,7 +1,8 @@
 import React from "react";
-import { Appbar, Avatar, Menu } from "react-native-paper";
+import { Appbar, Avatar, Menu, Text, Button } from "react-native-paper";
 import { useTheme } from "../context/ThemeContext";
 import { getHeaderTitle } from '@react-navigation/elements';
+import AuthService from "../services/auth/AuthService";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 export default function Header({ navigation, route, options, back }) {
@@ -15,6 +16,13 @@ export default function Header({ navigation, route, options, back }) {
 
   const hideDialog = () => setVisible(false);
   const { toggleThemeType, themeType, isDarkTheme, theme } = useTheme();
+
+  const logout = async () =>{
+    await AuthService.clearAuthToken().then((res)=>{
+       setVisible(false)
+       navigation.navigate('out');
+    });
+  }
 
   return (
     <Appbar.Header>
@@ -51,10 +59,9 @@ export default function Header({ navigation, route, options, back }) {
           />
           <Menu.Item
             onPress={() => {
-              console.log('Option 3 was pressed');
+              logout()
             }}
-            title="Option 3"
-            disabled
+            title={<Button icon="exit-to-app">Sair</Button>}
           />
         </Menu>
 
