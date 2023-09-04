@@ -44,14 +44,15 @@ export default function Conversor({ navigation }) {
     return (
         <View style={{ justifyContent: 'center', padding: 10, marginLeft: 10 }}>
            
-            <Button mode="contained" onPress={() => pickDocument()}>Carregar documento (.docx)</Button>
+            <Button mode="contained" onPress={() => pickDocument()}>
+                Carregar documento (.docx)
+            </Button>
 
             {pickedDocument && (
                 <View style={{ marginTop:10, justifyContent:'space-between' }}>
                     <Text style={{ fontWeight:'bold' }}>
                     <FileArchive color={theme.colors.secondary} size={48} />
                     {pickedDocument.name}
-                    <Fold size={10} color={theme.colors.secondary} />
                     </Text>
                     
                 </View>
