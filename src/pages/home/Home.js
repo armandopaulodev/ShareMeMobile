@@ -79,9 +79,6 @@ export default function Home({ navigation }) {
                     </Card.Content>
                 </Card>
                 <DataTableComponent />
-                <Text style={{ textAlign: 'center', marginTop: 100 }} onPress={toggleThemeType}>
-                    <Wave size={120} color={theme.colors.primary} />
-                </Text>
                 <View
                     style={{
                         flex: 1,
