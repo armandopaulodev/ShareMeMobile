@@ -10,25 +10,21 @@ class ConvertionService {
 
     // this is just example i will not auth routes
     let token = AuthService.getAuthToken();
-    
-    // const formData = new FormData();
-    // formData.append('file', {
-    //   uri: pickedDocument.uri,
-    //   name: pickedDocument.name,
-    //   type: pickedDocument.mimeType,
-    // });
+
+    const formData = new FormData();
+    formData.append('file', {
+      uri: file.uri,
+      name: file.name,
+      type: file.mimeType,
+    });
 
     try {
       const response = await fetch(base_url + 'api/convert/file', {
         method: 'POST',
         headers: {
-          Accept: 'application/json',
           "Content-Type": "multipart/form-data",
-          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          'file': file
-        }),
+        body: formData,
       }).then(res => res.json());
 
       console.log(response)
