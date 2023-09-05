@@ -47,7 +47,7 @@ export default function Home({ navigation }) {
                         </Card.Content>
                     </Card>
                 </View>
-                <Card style={{ marginBottom: 15 }} mode="contained">
+                <Card onPress={() => navigation.navigate('Ficheiro Temporario')} style={{ marginBottom: 15 }} mode="contained">
                     <Card.Content>
                         <Button icon={{ source: "monitor-share", direction: 'rtl' }}>
                             Gerar e compartilhar
