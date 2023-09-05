@@ -15,25 +15,25 @@ const DataTableComponent = () => {
   const [items] = React.useState([
     {
       key: 1,
-      name: 'Cupcake',
+      name: '...',
       calories: '12/08/2023 12:34',
       fat: 16,
     },
     {
       key: 2,
-      name: 'Eclair',
+      name: '...',
       calories: 262,
       fat: 16,
     },
     {
       key: 3,
-      name: 'Frozen yogurt',
+      name: '....',
       calories: 159,
       fat: 6,
     },
     {
       key: 4,
-      name: 'Gingerbread',
+      name: '.....',
       calories: 305,
       fat: 3.7,
     },

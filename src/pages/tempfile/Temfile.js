@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { View, Image, SafeAreaView, StyleSheet, FlatList } from "react-native";
+import { View, Image, SafeAreaView, StyleSheet, FlatList, TouchableOpacity, Share } from "react-native";
 import { Button, Card, Text, TextInput, ActivityIndicator, Portal, Modal, Dialog, Checkbox } from "react-native-paper";
 import { ThemeContextProvider, useTheme } from "../../context/ThemeContext";
 import { Plane, Swing, Wander } from 'react-native-animated-spinkit'
@@ -10,7 +10,9 @@ import TempFileService from "../../services/tempfiles/TempFileService";
 import { FlatGrid } from 'react-native-super-grid';
 import { FileText } from 'lucide-react-native'
 import * as DocumentPicker from 'expo-document-picker';
-
+import * as FileSystem from 'expo-file-system';
+import * as MediaLibrary from 'expo-media-library';
+import * as Sharing from 'expo-sharing';
 
 export default function Tempfile({ navigation }) {
     const { toggleThemeType, themeType, isDarkTheme, theme } = useTheme();
@@ -78,6 +80,12 @@ export default function Tempfile({ navigation }) {
             }
         })
     }
+
+    const ShareFile = async (url)=>{
+       await Share.share({
+            message: url
+          }); 
+    }
     return (
         <SafeAreaView>
             <View style={{ justifyContent: 'center', padding: 35, backgroundColor: 'white' }}>
@@ -102,9 +110,11 @@ export default function Tempfile({ navigation }) {
                             spacing={5}
                             renderItem={({ item }) => (
                                 <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate" style={[styles2.itemContainer, { backgroundColor: '#cbd5e1' }]}>
-                                    <FileText size={65} color={'#f472b6'} />
+                                   <TouchableOpacity onPress={()=>ShareFile(item.url)}>
+                                   <FileText size={65} color={'#f472b6'} />
                                     <Text style={styles2.itemName}>{'Nome do Ficheiro'}</Text>
                                     <Text style={styles2.itemCode}>{item.id}</Text>
+                                   </TouchableOpacity>
                                 </Animatable.View>
                             )}
                         />
