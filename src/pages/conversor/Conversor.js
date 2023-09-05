@@ -2,7 +2,7 @@
 import * as DocumentPicker from 'expo-document-picker';
 import { Camera, FileArchive } from 'lucide-react-native';
 import React, { useState, useEffect, useRef } from "react";
-import { View } from "react-native";
+import { View, Image } from "react-native";
 import { Fold, Wave } from 'react-native-animated-spinkit';
 import { Button, Text } from "react-native-paper";
 import { useTheme } from "../../context/ThemeContext";
@@ -12,6 +12,7 @@ import * as Notifications from 'expo-notifications';
 import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
 import * as Sharing from 'expo-sharing';
+import * as Animatable from 'react-native-animatable';
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -46,7 +47,7 @@ export default function Conversor({ navigation }) {
                 setPickedDocument(result.assets[0]);
                 ConvertionService.wordToPdf(result.assets[0]).then((response) => {
                     if (response.status === 200) {
-                        
+
                         delay(4000).then(() => {
                             schedulePushNotification(); //local notification
                             setConverting(false) //stop spinner
@@ -54,10 +55,10 @@ export default function Conversor({ navigation }) {
                                 response.data.url,
                                 FileSystem.documentDirectory + 'small.pdf'
                             )
-                                .then(({ uri }) =>  {
+                                .then(({ uri }) => {
                                     console.log('Finished downloading to ', uri);
                                     // Saving the file in a folder name `MyImages`
-                                    const { status } =  MediaLibrary.getPermissionsAsync();
+                                    const { status } = MediaLibrary.getPermissionsAsync();
                                     if (status === "granted") {
                                         const asset = MediaLibrary.createAssetAsync(url)
                                         MediaLibrary.createAlbumAsync("MyImages", asset, false)
@@ -100,10 +101,6 @@ export default function Conversor({ navigation }) {
     return (
         <View style={{ justifyContent: 'center', padding: 10, marginLeft: 10 }}>
 
-            <Button mode="contained" onPress={() => pickDocument()}>
-                Carregar documento (.docx)
-            </Button>
-
             {pickedDocument && (
                 <View style={{ marginTop: 10, justifyContent: 'space-between' }}>
                     <Text style={{ fontWeight: 'bold' }}>
@@ -124,7 +121,21 @@ export default function Conversor({ navigation }) {
                     </Text>
                 </> : ''
             }
-
+            
+           {
+             converting? '' :  
+             <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={2} direction="alternate">
+             <Image
+                 source={require('../../../assets/photos/wortopdf.jpg')}
+                 style={{ width: 400, height: 400, alignSelf: 'center', top: 70 }}
+             />
+             </Animatable.View>
+           }
+            <Animatable.View animation='bounceIn' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate">
+                <Button icon={{ source: "autorenew", direction: 'rtl' }} disabled={converting ? true : false} mode="contained" onPress={() => pickDocument()} style={{ padding: 10, marginTop: 50 }}>
+                    Carregar documento (.docx)
+                </Button>
+            </Animatable.View>
         </View>
     );
 };
