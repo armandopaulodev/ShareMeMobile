@@ -24,27 +24,23 @@ export default function Tempfile({ navigation }) {
         })
     }, []);
 
-    const renderItem = ({ item }) => (
-        <View style={styles.gridItem}>
-            <Text>{item.text}</Text>
-        </View>
-    );
     return (
         <SafeAreaView>
             <View style={{ justifyContent: 'center', padding: 35, backgroundColor: 'white' }}>
                 <Animatable.View animation='bounceIn' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate">
-                    <Button icon={{ source: "autorenew", direction: 'rtl' }} disabled={converting ? true : false} mode="contained" style={{ padding: 10, backgroundColor: '#f472b6' }}>
-                        Carregar Ficheiro
+                    <Button icon={{ source: "newspaper-plus", direction: 'rtl' }} disabled={converting ? true : false} mode="contained" style={{ padding: 10, backgroundColor: '#f472b6' }}>
+                        Criar Novo
                     </Button>
                 </Animatable.View>
 
                 {
-                    dataSource.length === 0 ? <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={2} direction="alternate">
+                    dataSource.length === 0 ? 
+                    <View animation='pulse' easing={'ease-in-out-quad'} iterationCount={2} direction="alternate">
                         <Image
                             source={require('../../../assets/photos/temp.jpg')}
                             style={{ width: 400, height: 400, alignSelf: 'center', top: 70 }}
                         />
-                    </Animatable.View> :
+                    </View> :
                         <FlatGrid
                             itemDimension={130}
                             data={dataSource}
