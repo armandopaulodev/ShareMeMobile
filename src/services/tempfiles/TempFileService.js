@@ -20,6 +20,35 @@ class TempFileService {
 
   }
 
+  static async upLoadFile(file) {
+
+    // this is just example i will not auth routes
+    let token = AuthService.getAuthToken();
+
+    const formData = new FormData();
+    formData.append('file', {
+      uri: file.uri,
+      name: file.name,
+      type: file.mimeType,
+    });
+
+    try {
+      const response = await fetch(base_url + 'api/upload/file', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        body: formData,
+      }).then(res => res.json());
+
+      return response;
+    } catch (error) {
+      console.error('Error storing token:', error);
+    }
+
+
+  }
+
 
 }
 

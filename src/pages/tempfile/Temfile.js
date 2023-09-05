@@ -3,12 +3,14 @@ import React, { useState, useEffect } from "react";
 import { View, Image, SafeAreaView, StyleSheet, FlatList } from "react-native";
 import { Button, Card, Text, TextInput, ActivityIndicator, Portal, Modal, Dialog, Checkbox } from "react-native-paper";
 import { ThemeContextProvider, useTheme } from "../../context/ThemeContext";
-import { Plane, Swing } from 'react-native-animated-spinkit'
+import { Plane, Swing, Wander } from 'react-native-animated-spinkit'
 import AuthService from "../../services/auth/AuthService";
 import * as Animatable from 'react-native-animatable';
 import TempFileService from "../../services/tempfiles/TempFileService";
 import { FlatGrid } from 'react-native-super-grid';
 import { FileText } from 'lucide-react-native'
+import * as DocumentPicker from 'expo-document-picker';
+
 
 export default function Tempfile({ navigation }) {
     const { toggleThemeType, themeType, isDarkTheme, theme } = useTheme();
@@ -18,6 +20,7 @@ export default function Tempfile({ navigation }) {
     const [visible, setVisible] = React.useState(false);
     const [visibleModal, setVisibleModal] = React.useState(false);
     const [checked, setChecked] = React.useState(false);
+    const [file, setFile] = React.useState('');
 
     const showModal = () => setVisibleModal(true);
     const hideModal = () => setVisibleModal(false);
@@ -27,7 +30,7 @@ export default function Tempfile({ navigation }) {
 
     const hideDialog = () => setVisible(false);
 
-    const containerStyle = { backgroundColor: 'white', padding: 20, justifyContent: 'center', marginLeft: 10, marginRight: 10 };
+    const containerStyle = { backgroundColor: 'white', padding: 20,textAlign:'center', justifyContent: 'center', marginLeft: 10, marginRight: 10 };
     const delay = ms => new Promise(
         resolve => setTimeout(resolve, ms)
     );
@@ -42,6 +45,39 @@ export default function Tempfile({ navigation }) {
         })
     }, []);
 
+    const pickDocument = async () => {
+
+        try {
+            const result = await DocumentPicker.getDocumentAsync({
+                type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            });
+            if (result.canceled === false) {
+                setConverting(true); //enable spinner if picked
+                setFile(result.assets[0]);
+
+            } else {
+                console.log('Document picking canceled.');
+            }
+        } catch (err) {
+            console.error('Error picking document:', err);
+        }
+    }
+
+    const upLoad = async () => {
+        hideDialog();
+        showModal();
+        await TempFileService.upLoadFile(file).then((response) => {
+            if (response.status === 200) {
+
+                delay(4000).then(() => {
+                    setDataSource(response.data)
+                    hideModal();
+                    setConverting(false)
+                    setFile('');
+                })
+            }
+        })
+    }
     return (
         <SafeAreaView>
             <View style={{ justifyContent: 'center', padding: 35, backgroundColor: 'white' }}>
@@ -52,7 +88,7 @@ export default function Tempfile({ navigation }) {
                 </Animatable.View>
 
                 {
-                    dataSource.length === 0 ?
+                    dataSource?.length === 0 ?
                         <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={2} direction="alternate">
                             <Image
                                 source={require('../../../assets/photos/temp.jpg')}
@@ -77,7 +113,7 @@ export default function Tempfile({ navigation }) {
 
                 <Portal>
                     <Modal visible={visibleModal} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-                        <Text>Example Modal.  Click outside this area to dismiss.</Text>
+                        <Wander color="#f472b6" size={50} />
                     </Modal>
                 </Portal>
                 <Portal>
@@ -85,16 +121,19 @@ export default function Tempfile({ navigation }) {
                         <Dialog.Title>Upload de ficheiro</Dialog.Title>
                         <Dialog.Content>
                             <TextInput
-                                label="Email"
+                                label="Numero de Download"
                                 mode="outlined"
                                 style={{ marginTop: 14 }}
 
                             />
-                          
-                            <Button mode="outlined" icon={'upload'} style={{ marginTop: 8 }}>Carregar Ficheiro</Button>
+
+                            <Button mode="outlined" icon={'upload'} style={{ marginTop: 8 }} onPress={pickDocument}>Carregar Ficheiro</Button>
+                            <Text style={{ fontWeight: 'bold' }}>
+                                {file.name}
+                            </Text>
                         </Dialog.Content>
                         <Dialog.Actions>
-                            <Button mode="elevated" icon={'content-save'} onPress={hideDialog}>Finalizar</Button>
+                            <Button onPress={upLoad} mode="elevated" icon={'content-save'}>Finalizar</Button>
                         </Dialog.Actions>
                     </Dialog>
                 </Portal>
