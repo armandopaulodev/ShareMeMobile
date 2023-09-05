@@ -32,7 +32,7 @@ export default function Home({ navigation }) {
             <ScrollView>
 
                 <View style={{ flexDirection: 'row', justifyContent:'space-around' }}>
-                    <Card collapsable={true} style={{ marginBottom: 15, padding:10 }}>
+                    <Card onPress={() => navigation.navigate('Nova Turma')} collapsable={true} style={{ marginBottom: 15, padding:10 }}>
                         <Card.Content>
                             <Button icon={{ source: "newspaper-variant-multiple-outline", direction: 'rtl' }}>
                                 Nova Turma

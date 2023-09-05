@@ -7,6 +7,7 @@ import Login from "../pages/login/Login";
 import AuthService from "../services/auth/AuthService";
 import Header from "../components/Header";
 import Conversor from "../pages/conversor/Conversor";
+import Classroom from "../pages/rooms/Classroom";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 
@@ -57,6 +58,7 @@ export default function RouteServiceProvider() {
             <Stack.Screen name="ShareMe" component={Home} />
             <Stack.Screen name="out" component={Login} options={{ headerShown: false }} />
             <Stack.Screen name="Conversor" component={Conversor} />
+            <Stack.Screen name="Nova Turma" component={Classroom} />
 
         </Stack.Navigator>
     );
