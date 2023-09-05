@@ -39,9 +39,9 @@ export default function Home({ navigation }) {
                             </Button>
                         </Card.Content>
                     </Card>
-                    <Card onPress={() => navigation.navigate('Conversor')} style={{ marginBottom: 15, padding:10  }}>
+                    <Card onPress={() => navigation.navigate('Conversor')} style={{ marginBottom: 15, padding:10 }}>
                         <Card.Content>
-                            <Button icon={{ source: "autorenew", direction: 'rtl' }}>
+                            <Button icon={{ source: "autorenew", direction: 'rtl' }} >
                                 Conversor
                             </Button>
                         </Card.Content>
