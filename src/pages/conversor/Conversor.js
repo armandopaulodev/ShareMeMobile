@@ -104,7 +104,7 @@ export default function Conversor({ navigation }) {
             {pickedDocument && (
                 <View style={{ marginTop: 10, justifyContent: 'space-between' }}>
                     <Text style={{ fontWeight: 'bold' }}>
-                        <FileArchive color={theme.colors.secondary} size={48} />
+                        <FileArchive color={'#8b5cf6'} size={48} />
                         {pickedDocument.name}
                     </Text>
 
@@ -114,25 +114,25 @@ export default function Conversor({ navigation }) {
             {
                 converting ? <>
                     <Text style={{ textAlign: 'center', marginTop: 100 }} onPress={toggleThemeType}>
-                        <Wave size={200} color={theme.colors.primary} />
+                        <Wave size={200} color={'#8b5cf6'} />
                     </Text>
                     <Text style={{ textAlign: 'center', marginTop: 20 }} onPress={toggleThemeType}>
                         Convertendo! Por favor Aguarde...
                     </Text>
                 </> : ''
             }
-            
-           {
-             converting? '' :  
-             <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={2} direction="alternate">
-             <Image
-                 source={require('../../../assets/photos/wortopdf.jpg')}
-                 style={{ width: 400, height: 400, alignSelf: 'center', top: 70 }}
-             />
-             </Animatable.View>
-           }
+
+            {
+                converting ? '' :
+                    <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={2} direction="alternate">
+                        <Image
+                            source={require('../../../assets/photos/wortopdf.jpg')}
+                            style={{ width: 400, height: 400, alignSelf: 'center', top: 70 }}
+                        />
+                    </Animatable.View>
+            }
             <Animatable.View animation='bounceIn' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate">
-                <Button icon={{ source: "autorenew", direction: 'rtl' }} disabled={converting ? true : false} mode="contained" onPress={() => pickDocument()} style={{ padding: 10, marginTop: 50 }}>
+                <Button icon={{ source: "autorenew", direction: 'rtl' }} disabled={converting ? true : false} mode="contained" onPress={() => pickDocument()} style={{ padding: 10, marginTop: 50, backgroundColor: '#8b5cf6' }}>
                     Carregar documento (.docx)
                 </Button>
             </Animatable.View>

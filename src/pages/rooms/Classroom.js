@@ -14,7 +14,7 @@ export default function Classroom({ navigation }) {
 
             <Animatable.View animation='bounceIn' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate">
                 <Button mode="contained" icon={'account-group'} style={{ padding: 10 }}>
-                    Carregar documento (.docx)
+                    Crie Grupo de Compartilhamento
                 </Button>
             </Animatable.View>
 
