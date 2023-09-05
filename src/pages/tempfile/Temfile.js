@@ -51,11 +51,11 @@ export default function Tempfile({ navigation }) {
                             style={styles2.gridView}
                             spacing={5}
                             renderItem={({ item }) => (
-                                <View style={[styles2.itemContainer, { backgroundColor: '#cbd5e1' }]}>
+                                <Animatable.View animation='bounceIn' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate" style={[styles2.itemContainer, { backgroundColor: '#cbd5e1' }]}>
                                     <FileText size={65} color={'#f472b6'} />
                                     <Text style={styles2.itemName}>{'Nome do Ficheiro'}</Text>
                                     <Text style={styles2.itemCode}>{item.id}</Text>
-                                </View>
+                                </Animatable.View>
                             )}
                         />
 
