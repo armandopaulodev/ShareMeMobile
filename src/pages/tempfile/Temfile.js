@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { View, Image, SafeAreaView, StyleSheet, FlatList } from "react-native";
-import { Button, Card, Text, TextInput, ActivityIndicator } from "react-native-paper";
+import { Button, Card, Text, TextInput, ActivityIndicator, Portal, Modal, Dialog, Checkbox } from "react-native-paper";
 import { ThemeContextProvider, useTheme } from "../../context/ThemeContext";
 import { Plane, Swing } from 'react-native-animated-spinkit'
 import AuthService from "../../services/auth/AuthService";
@@ -15,12 +15,30 @@ export default function Tempfile({ navigation }) {
     const [converting, setConverting] = useState(false);
     const [dataSource, setDataSource] = useState([]);
 
-    useEffect(() => {
-        TempFileService.getTempFile().then((res) => {
+    const [visible, setVisible] = React.useState(false);
+    const [visibleModal, setVisibleModal] = React.useState(false);
+    const [checked, setChecked] = React.useState(false);
 
-            if (res.status === 200) {
-                setDataSource(res.data);
-            }
+    const showModal = () => setVisibleModal(true);
+    const hideModal = () => setVisibleModal(false);
+
+
+    const showDialog = () => setVisible(true);
+
+    const hideDialog = () => setVisible(false);
+
+    const containerStyle = { backgroundColor: 'white', padding: 20, justifyContent: 'center', marginLeft: 10, marginRight: 10 };
+    const delay = ms => new Promise(
+        resolve => setTimeout(resolve, ms)
+    );
+    useEffect(() => {
+        delay(3000).then(() => {
+            TempFileService.getTempFile().then((res) => {
+
+                if (res.status === 200) {
+                    setDataSource(res.data);
+                }
+            })
         })
     }, []);
 
@@ -28,26 +46,26 @@ export default function Tempfile({ navigation }) {
         <SafeAreaView>
             <View style={{ justifyContent: 'center', padding: 35, backgroundColor: 'white' }}>
                 <Animatable.View animation='bounceIn' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate">
-                    <Button icon={{ source: "newspaper-plus", direction: 'rtl' }} disabled={converting ? true : false} mode="contained" style={{ padding: 10, backgroundColor: '#f472b6' }}>
+                    <Button onPress={showDialog} icon={{ source: "newspaper-plus", direction: 'rtl' }} disabled={converting ? true : false} mode="contained" style={{ padding: 10, backgroundColor: '#f472b6' }}>
                         Criar Novo
                     </Button>
                 </Animatable.View>
 
                 {
-                    dataSource.length === 0 ? 
-                    <View animation='pulse' easing={'ease-in-out-quad'} iterationCount={2} direction="alternate">
-                        <Image
-                            source={require('../../../assets/photos/temp.jpg')}
-                            style={{ width: 400, height: 400, alignSelf: 'center', top: 70 }}
-                        />
-                    </View> :
+                    dataSource.length === 0 ?
+                        <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={2} direction="alternate">
+                            <Image
+                                source={require('../../../assets/photos/temp.jpg')}
+                                style={{ width: 400, height: 400, alignSelf: 'center', top: 70 }}
+                            />
+                        </Animatable.View> :
                         <FlatGrid
                             itemDimension={130}
                             data={dataSource}
                             style={styles2.gridView}
                             spacing={5}
                             renderItem={({ item }) => (
-                                <Animatable.View animation='bounceIn' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate" style={[styles2.itemContainer, { backgroundColor: '#cbd5e1' }]}>
+                                <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate" style={[styles2.itemContainer, { backgroundColor: '#cbd5e1' }]}>
                                     <FileText size={65} color={'#f472b6'} />
                                     <Text style={styles2.itemName}>{'Nome do Ficheiro'}</Text>
                                     <Text style={styles2.itemCode}>{item.id}</Text>
@@ -57,7 +75,29 @@ export default function Tempfile({ navigation }) {
 
                 }
 
+                <Portal>
+                    <Modal visible={visibleModal} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+                        <Text>Example Modal.  Click outside this area to dismiss.</Text>
+                    </Modal>
+                </Portal>
+                <Portal>
+                    <Dialog visible={visible} onDismiss={hideDialog}>
+                        <Dialog.Title>Upload de ficheiro</Dialog.Title>
+                        <Dialog.Content>
+                            <TextInput
+                                label="Email"
+                                mode="outlined"
+                                style={{ marginTop: 14 }}
 
+                            />
+                          
+                            <Button mode="outlined" icon={'upload'} style={{ marginTop: 8 }}>Carregar Ficheiro</Button>
+                        </Dialog.Content>
+                        <Dialog.Actions>
+                            <Button mode="elevated" icon={'content-save'} onPress={hideDialog}>Finalizar</Button>
+                        </Dialog.Actions>
+                    </Dialog>
+                </Portal>
             </View>
         </SafeAreaView>
     );
