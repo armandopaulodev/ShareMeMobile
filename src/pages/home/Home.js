@@ -10,7 +10,7 @@ const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 
 export default function Home({ navigation }) {
- 
+
     const [visible, setVisible] = React.useState(false);
 
     const showDialog = () => setVisible(true);
@@ -28,24 +28,26 @@ export default function Home({ navigation }) {
         </View>
     );
     return (
-        <View style={{ flex: 1, justifyContent: 'center', padding: 5, marginLeft: 5 }}>
+        <View style={{ flex: 1, justifyContent: 'center', padding: 5, marginLeft: 2 }}>
             <ScrollView>
-      
-                <Card collapsable={true} style={{ marginBottom:15 }}>
-                    <Card.Content>
-                        <Button icon={{ source: "newspaper-variant-multiple-outline", direction: 'rtl' }}>
-                            Nova Turma
-                        </Button>
-                    </Card.Content>
-                </Card>
-                <Card onPress={() => navigation.navigate('Conversor')} style={{ marginBottom:15 }}>
-                    <Card.Content>
-                        <Button icon={{ source: "autorenew", direction: 'rtl' }}>
-                            Conversor
-                        </Button>
-                    </Card.Content>
-                </Card>
-                <Card style={{ marginBottom:15 }}>
+
+                <View style={{ flexDirection: 'row', justifyContent:'space-around' }}>
+                    <Card collapsable={true} style={{ marginBottom: 15, padding:10 }}>
+                        <Card.Content>
+                            <Button icon={{ source: "newspaper-variant-multiple-outline", direction: 'rtl' }}>
+                                Nova Turma
+                            </Button>
+                        </Card.Content>
+                    </Card>
+                    <Card onPress={() => navigation.navigate('Conversor')} style={{ marginBottom: 15, padding:10  }}>
+                        <Card.Content>
+                            <Button icon={{ source: "autorenew", direction: 'rtl' }}>
+                                Conversor
+                            </Button>
+                        </Card.Content>
+                    </Card>
+                </View>
+                <Card style={{ marginBottom: 15 }} mode="contained">
                     <Card.Content>
                         <Button icon={{ source: "monitor-share", direction: 'rtl' }}>
                             Gerar e compartilhar
