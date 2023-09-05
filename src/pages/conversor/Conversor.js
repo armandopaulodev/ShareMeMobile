@@ -46,8 +46,9 @@ export default function Conversor({ navigation }) {
                 setPickedDocument(result.assets[0]);
                 ConvertionService.wordToPdf(result.assets[0]).then((response) => {
                     if (response.status === 200) {
-                        schedulePushNotification(); //local notification
+                        
                         delay(4000).then(() => {
+                            schedulePushNotification(); //local notification
                             setConverting(false) //stop spinner
                             FileSystem.downloadAsync(
                                 response.data.url,
