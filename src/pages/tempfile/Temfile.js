@@ -1,18 +1,14 @@
 
-import React, { useState, useEffect } from "react";
-import { View, Image, SafeAreaView, StyleSheet, FlatList, TouchableOpacity, Share } from "react-native";
-import { Button, Card, Text, TextInput, ActivityIndicator, Portal, Modal, Dialog, Checkbox } from "react-native-paper";
-import { ThemeContextProvider, useTheme } from "../../context/ThemeContext";
-import { Plane, Swing, Wander } from 'react-native-animated-spinkit'
-import AuthService from "../../services/auth/AuthService";
-import * as Animatable from 'react-native-animatable';
-import TempFileService from "../../services/tempfiles/TempFileService";
-import { FlatGrid } from 'react-native-super-grid';
-import { FileText } from 'lucide-react-native'
 import * as DocumentPicker from 'expo-document-picker';
-import * as FileSystem from 'expo-file-system';
-import * as MediaLibrary from 'expo-media-library';
-import * as Sharing from 'expo-sharing';
+import { FileText } from 'lucide-react-native';
+import React, { useEffect, useState } from "react";
+import { Image, SafeAreaView, Share, StyleSheet, TouchableOpacity, View } from "react-native";
+import * as Animatable from 'react-native-animatable';
+import { Wander } from 'react-native-animated-spinkit';
+import { Button, Dialog, Modal, Portal, Text, TextInput, Searchbar, FAB } from "react-native-paper";
+import { FlatGrid } from 'react-native-super-grid';
+import { useTheme } from "../../context/ThemeContext";
+import TempFileService from "../../services/tempfiles/TempFileService";
 
 export default function Tempfile({ navigation }) {
     const { toggleThemeType, themeType, isDarkTheme, theme } = useTheme();
@@ -23,6 +19,10 @@ export default function Tempfile({ navigation }) {
     const [visibleModal, setVisibleModal] = React.useState(false);
     const [checked, setChecked] = React.useState(false);
     const [file, setFile] = React.useState('');
+    const [searchQuery, setSearchQuery] = React.useState('');
+
+
+    const onChangeSearch = query => setSearchQuery(query);
 
     const showModal = () => setVisibleModal(true);
     const hideModal = () => setVisibleModal(false);
@@ -32,7 +32,7 @@ export default function Tempfile({ navigation }) {
 
     const hideDialog = () => setVisible(false);
 
-    const containerStyle = { backgroundColor: 'white', padding: 20,textAlign:'center', justifyContent: 'center', marginLeft: 10, marginRight: 10 };
+    const containerStyle = { backgroundColor: 'white', padding: 20, textAlign: 'center', justifyContent: 'center', marginLeft: 10, marginRight: 10 };
     const delay = ms => new Promise(
         resolve => setTimeout(resolve, ms)
     );
@@ -81,19 +81,19 @@ export default function Tempfile({ navigation }) {
         })
     }
 
-    const ShareFile = async (url)=>{
-       await Share.share({
+    const ShareFile = async (url) => {
+        await Share.share({
             message: url
-          }); 
+        });
     }
     return (
         <SafeAreaView>
             <View style={{ justifyContent: 'center', padding: 35, backgroundColor: 'white' }}>
-                <Animatable.View animation='bounceIn' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate">
-                    <Button onPress={showDialog} icon={{ source: "newspaper-plus", direction: 'rtl' }} disabled={converting ? true : false} mode="contained" style={{ padding: 10, backgroundColor: '#f472b6' }}>
-                        Criar Novo
-                    </Button>
-                </Animatable.View>
+                <Searchbar
+                    placeholder="Search"
+                    onChangeText={onChangeSearch}
+                    value={searchQuery}
+                />
 
                 {
                     dataSource?.length === 0 ?
@@ -110,17 +110,28 @@ export default function Tempfile({ navigation }) {
                             spacing={5}
                             renderItem={({ item }) => (
                                 <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate" style={[styles2.itemContainer, { backgroundColor: '#cbd5e1' }]}>
-                                   <TouchableOpacity onPress={()=>ShareFile(item.url)}>
-                                   <FileText size={65} color={'#f472b6'} />
-                                    <Text style={styles2.itemName}>{'Nome do Ficheiro'}</Text>
-                                    <Text style={styles2.itemCode}>{item.id}</Text>
-                                   </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => ShareFile(item.url)} onLongPress={() => ShareFile(item.url)}>
+                                        <FileText size={65} color={'#f472b6'} />
+                                        <Text style={styles2.itemName}>{'Nome do Ficheiro'}</Text>
+                                        <Text style={styles2.itemCode}>{item.id}</Text>
+                                    </TouchableOpacity>
                                 </Animatable.View>
                             )}
                         />
 
                 }
 
+                <Portal>
+                    <FAB
+                    
+                     color='white'
+                        icon="plus"
+                        style={fabStyle.fab}
+                        onPress={showDialog}
+                        onLongPress={showDialog}
+                    />
+
+                </Portal>
                 <Portal>
                     <Modal visible={visibleModal} onDismiss={hideModal} contentContainerStyle={containerStyle}>
                         <Wander color="#f472b6" size={50} />
@@ -147,7 +158,9 @@ export default function Tempfile({ navigation }) {
                         </Dialog.Actions>
                     </Dialog>
                 </Portal>
+
             </View>
+
         </SafeAreaView>
     );
 };
@@ -176,3 +189,13 @@ const styles2 = StyleSheet.create({
         color: '#a8a29e',
     },
 });
+
+const fabStyle = StyleSheet.create({
+    fab: {
+        position: 'absolute',
+        margin: 16,
+        right: 0,
+        bottom: 0,
+        backgroundColor: '#f472b6'
+    },
+})
