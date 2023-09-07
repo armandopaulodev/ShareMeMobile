@@ -26,7 +26,7 @@ export default function Header({ navigation, route, options, back }) {
 
   return (
     <Appbar.Header>
-      {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
+      {title!=='ShareMe' && back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
       <Appbar.Content title={title} />
       {
         !back? (
