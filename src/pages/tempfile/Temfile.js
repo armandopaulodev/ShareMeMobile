@@ -4,7 +4,7 @@ import { FileText } from 'lucide-react-native';
 import React, { useEffect, useState } from "react";
 import { Image, SafeAreaView, Share, StyleSheet, TouchableOpacity, View } from "react-native";
 import * as Animatable from 'react-native-animatable';
-import { Wander } from 'react-native-animated-spinkit';
+import { Wander, Wave } from 'react-native-animated-spinkit';
 import { Button, Dialog, Modal, Portal, Text, TextInput, Searchbar, FAB } from "react-native-paper";
 import { FlatGrid } from 'react-native-super-grid';
 import { useTheme } from "../../context/ThemeContext";
@@ -135,7 +135,12 @@ export default function Tempfile({ navigation }) {
                 </Portal>
                 <Portal>
                     <Modal visible={visibleModal} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-                        <Wander color="#f472b6" size={50} />
+                    <Text style={{ textAlign: 'center'}}>
+                      Conectando o servidor
+                    </Text>
+                    <Text style={{ textAlign: 'center'}}>
+                        <Wander size={50} color={'#f472b6'} />
+                    </Text>
                     </Modal>
                 </Portal>
                 <Portal>
