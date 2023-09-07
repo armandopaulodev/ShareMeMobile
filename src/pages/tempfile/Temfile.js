@@ -22,7 +22,9 @@ export default function Tempfile({ navigation }) {
     const [searchQuery, setSearchQuery] = React.useState('');
 
 
-    const onChangeSearch = query => setSearchQuery(query);
+    const onChangeSearch = (query) => {
+        setSearchQuery(query)
+    };
 
     const showModal = () => setVisibleModal(true);
     const hideModal = () => setVisibleModal(false);
@@ -90,7 +92,6 @@ export default function Tempfile({ navigation }) {
         <SafeAreaView>
             <View style={{ justifyContent: 'center', padding: 35, backgroundColor: 'white' }}>
                 <Searchbar
-                    placeholder="Search"
                     onChangeText={onChangeSearch}
                     value={searchQuery}
                 />
@@ -123,8 +124,8 @@ export default function Tempfile({ navigation }) {
 
                 <Portal>
                     <FAB
-                    
-                     color='white'
+                        animated
+                        color='white'
                         icon="plus"
                         style={fabStyle.fab}
                         onPress={showDialog}
