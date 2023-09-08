@@ -6,9 +6,6 @@ import DataTableComponent from "../../components/DataTable";
 import { useTheme } from "../../context/ThemeContext";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
-
-
-
 export default function Home({ navigation }) {
 
     const [visible, setVisible] = React.useState(false);
@@ -19,9 +16,6 @@ export default function Home({ navigation }) {
     const { toggleThemeType, themeType, isDarkTheme, theme } = useTheme();
 
 
-
-
-
     const renderItem = ({ item }) => (
         <View style={{ width: '50%', marginBottom: 20 }}>
             <Text>{item.title}</Text>
@@ -30,7 +24,6 @@ export default function Home({ navigation }) {
     return (
         <View style={{ flex: 1, justifyContent: 'center', padding: 5, marginLeft: 2 }}>
             <ScrollView>
-
                 <View style={{ flexDirection: 'row', justifyContent:'space-around' }}>
                     <Card onPress={() => navigation.navigate('Nova Turma')} collapsable={true} style={{ marginBottom: 15, padding:10 }}>
                         <Card.Content>
@@ -54,14 +47,7 @@ export default function Home({ navigation }) {
                         </Button>
                     </Card.Content>
                 </Card>
-                <DataTableComponent />
-                <View
-                    style={{
-                        flex: 1,
-                        alignItems: 'center',
-                        justifyContent: 'space-around',
-                    }}>
-                </View>
+                <DataTableComponent/> 
             </ScrollView>
         </View>
     );

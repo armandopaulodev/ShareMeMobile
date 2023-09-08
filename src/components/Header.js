@@ -25,9 +25,9 @@ export default function Header({ navigation, route, options, back }) {
   }
 
   return (
-    <Appbar.Header>
+    <Appbar.Header style={{ backgroundColor: isDarkTheme? '':'#d946ef' }}>
       {title!=='ShareMe' && back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title={title} />
+      <Appbar.Content title={title} color="white"/>
       {
         !back? (
           <Appbar.Action

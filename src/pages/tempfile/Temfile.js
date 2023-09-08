@@ -98,7 +98,7 @@ export default function Tempfile({ navigation }) {
 
                 {
                     dataSource?.length === 0 ?
-                        <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={2} direction="alternate">
+                        <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={10} direction="alternate">
                             <Image
                                 source={require('../../../assets/photos/temp.jpg')}
                                 style={{ width: 400, height: 400, alignSelf: 'center', top: 70 }}
@@ -113,7 +113,7 @@ export default function Tempfile({ navigation }) {
                                 <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate" style={[styles2.itemContainer, { backgroundColor: '#cbd5e1' }]}>
                                     <TouchableOpacity onPress={() => ShareFile(item.url)} onLongPress={() => ShareFile(item.url)}>
                                         <FileText size={65} color={'#f472b6'} />
-                                        <Text style={styles2.itemName}>{'Nome do Ficheiro'}</Text>
+                                        <Text style={styles2.itemName}>{item.name}</Text>
                                         <Text style={styles2.itemCode}>{item.id}</Text>
                                     </TouchableOpacity>
                                 </Animatable.View>
