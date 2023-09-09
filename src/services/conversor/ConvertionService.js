@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthService from '../auth/AuthService';
 
 const AUTH_TOKEN_KEY = 'auth_token';
-const base_url = 'http://192.168.20.187:8001/';
+const base_url = 'http://192.168.205.187:8001/';
 
 class ConvertionService {
 

@@ -1,6 +1,5 @@
-import React, { useRef, useState, useEffect } from "react";
-import { FlatList, ScrollView, Text, View } from 'react-native';
-import { Wave } from 'react-native-animated-spinkit';
+import React from "react";
+import { ScrollView, Text, View } from 'react-native';
 import { Avatar, Button, Card } from "react-native-paper";
 import DataTableComponent from "../../components/DataTable";
 import { useTheme } from "../../context/ThemeContext";
@@ -24,15 +23,15 @@ export default function Home({ navigation }) {
     return (
         <View style={{ flex: 1, justifyContent: 'center', padding: 5, marginLeft: 2 }}>
             <ScrollView>
-                <View style={{ flexDirection: 'row', justifyContent:'space-around' }}>
-                    <Card onPress={() => navigation.navigate('Nova Turma')} collapsable={true} style={{ marginBottom: 15, padding:10 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                    <Card onPress={() => navigation.navigate('Nova Turma')} collapsable={true} style={{ marginBottom: 15, padding: 10 }}>
                         <Card.Content>
                             <Button icon={{ source: "newspaper-variant-multiple-outline", direction: 'rtl' }}>
                                 Nova Turma
                             </Button>
                         </Card.Content>
                     </Card>
-                    <Card onPress={() => navigation.navigate('Conversor')} style={{ marginBottom: 15, padding:10 }}>
+                    <Card onPress={() => navigation.navigate('Conversor')} style={{ marginBottom: 15, padding: 10 }}>
                         <Card.Content>
                             <Button icon={{ source: "autorenew", direction: 'rtl' }} >
                                 Conversor
@@ -47,8 +46,9 @@ export default function Home({ navigation }) {
                         </Button>
                     </Card.Content>
                 </Card>
-                <DataTableComponent/> 
+                <DataTableComponent />
             </ScrollView>
+
         </View>
     );
 };

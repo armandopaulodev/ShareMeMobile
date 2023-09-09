@@ -5,6 +5,7 @@ import { getHeaderTitle } from '@react-navigation/elements';
 import AuthService from "../services/auth/AuthService";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
+
 export default function Header({ navigation, route, options, back }) {
 
   const title = getHeaderTitle(options, route.name);
