@@ -26,7 +26,7 @@ export default function Home({ navigation }) {
     return (
         <View style={{ flex: 1, justifyContent: 'center', padding: 5, marginLeft: 2 }}>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <View key={1} >
+                <View key={1} >
                     <Card onPress={() => navigation.navigate('Ficheiro Temporario')} collapsable={true} style={styles.carouselItem}>
                         <Card.Content>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -34,7 +34,7 @@ export default function Home({ navigation }) {
                                     source={require('../../../assets/photos/temp.png')}
                                     style={{ width: 170, height: 145, alignSelf: 'center', top: -14 }}
                                 />
-                                <View style={{ marginLeft:-20 }}>
+                                <View style={{ marginLeft: -20 }}>
                                     <Text style={styles.carouselText}>Upload</Text>
                                     <Text style={styles.carouselSubtitle}>Gerar e compartilhar</Text>
                                     <Text style={styles.carouselSubtitle}>Ficheiros temporarios</Text>
@@ -54,7 +54,7 @@ export default function Home({ navigation }) {
                                     source={require('../../../assets/photos/empty.png')}
                                     style={{ width: 170, height: 145, alignSelf: 'center', top: -14 }}
                                 />
-                                <View style={{ marginLeft:-20 }}>
+                                <View style={{ marginLeft: -20 }}>
                                     <Text style={styles.carouselText}>Crie turmas</Text>
                                     <Text style={styles.carouselSubtitle}>Melhore a sua experiencia</Text>
                                     <Text style={styles.carouselSubtitle}>colaborando em grupo</Text>
@@ -74,7 +74,7 @@ export default function Home({ navigation }) {
                                     source={require('../../../assets/photos/wortopdf.png')}
                                     style={{ width: 170, height: 145, alignSelf: 'center', top: -14 }}
                                 />
-                                <View style={{ marginLeft:-20 }}>
+                                <View style={{ marginLeft: -20 }}>
                                     <Text style={styles.carouselText}>Conversor</Text>
                                     <Text style={styles.carouselSubtitle}>Converta ficheiros gratis</Text>
                                     <Text style={styles.carouselSubtitle}>docx para pdf</Text>
@@ -86,9 +86,8 @@ export default function Home({ navigation }) {
                     </Card>
 
                 </View>
-             
             </ScrollView>
-            <ScrollView>    
+            <ScrollView>
                 <DataTableComponent />
             </ScrollView>
 
