@@ -87,10 +87,9 @@ export default function Home({ navigation }) {
 
                 </View>
             </ScrollView>
-            <ScrollView>
-                <DataTableComponent />
-            </ScrollView>
-
+             <View style={{ top:-200 }}>
+             <DataTableComponent />
+             </View>
         </View>
     );
 };
@@ -99,10 +98,6 @@ const styles = StyleSheet.create({
     carouselItem: {
         width: 340, // Set the width of each item
         height: 150, // Set the height of each item
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        // backgroundColor: 'lightblue',
-        // borderColor: 'gray',
         marginHorizontal: 10,
         borderRadius: 20
     },
