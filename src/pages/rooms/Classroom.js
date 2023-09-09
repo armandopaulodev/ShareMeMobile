@@ -13,7 +13,7 @@ export default function Classroom({ navigation }) {
         <View style={{ justifyContent: 'center', padding: 35 }}>
 
             <Animatable.View animation='bounceIn' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate">
-                <Button mode="contained" icon={'account-group'} style={{ padding: 10 }}>
+                <Button mode="contained" icon={'account-group'} style={{ padding: 10, backgroundColor:'#f87171' }}>
                     Crie Grupo de Compartilhamento
                 </Button>
             </Animatable.View>

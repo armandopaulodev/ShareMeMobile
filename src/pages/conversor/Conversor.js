@@ -132,7 +132,7 @@ export default function Conversor({ navigation }) {
                     </Animatable.View>
             }
             <Animatable.View animation='bounceIn' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate">
-                <Button icon={{ source: "autorenew", direction: 'rtl' }} disabled={converting ? true : false} mode="contained" onPress={() => pickDocument()} style={{ padding: 10, marginTop: 50, backgroundColor: '#8b5cf6' }}>
+                <Button icon={{ source: "autorenew", direction: 'rtl' }} disabled={converting ? true : false} mode="contained" onPress={() => pickDocument()} style={{ padding: 10, marginTop: 50, backgroundColor: '#f87171' }}>
                     Carregar documento (.docx)
                 </Button>
             </Animatable.View>

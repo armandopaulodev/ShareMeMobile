@@ -35,7 +35,7 @@ export default function Home({ navigation }) {
                                     style={{ width: 170, height: 145, alignSelf: 'center', top: -14 }}
                                 />
                                 <View style={{ marginLeft: -20 }}>
-                                    <Text style={styles.carouselText}>Upload</Text>
+                                    <Text style={styles.carouselText}>Uploader</Text>
                                     <Text style={styles.carouselSubtitle}>Gerar e compartilhar</Text>
                                     <Text style={styles.carouselSubtitle}>Ficheiros temporarios</Text>
                                 </View>
