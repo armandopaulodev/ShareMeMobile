@@ -87,9 +87,9 @@ export default function Home({ navigation }) {
 
                 </View>
             </ScrollView>
-             <ScrollView style={{ top:-30 }}>
-             <DataTableComponent />
-             </ScrollView>
+            <ScrollView style={{ top: -30 }}>
+                <DataTableComponent />
+            </ScrollView>
         </View>
     );
 };
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         width: 340, // Set the width of each item
         height: 150, // Set the height of each item
         marginHorizontal: 10,
-        borderRadius: 20
+        borderRadius: 20,
     },
     carouselText: {
         fontSize: 24,
