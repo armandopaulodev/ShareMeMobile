@@ -100,7 +100,7 @@ export default function Tempfile({ navigation }) {
                     dataSource?.length === 0 ?
                         <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={10} direction="alternate">
                             <Image
-                                source={require('../../../assets/photos/temp.jpg')}
+                                source={require('../../../assets/photos/temp.png')}
                                 style={{ width: 400, height: 400, alignSelf: 'center', top: 70 }}
                             />
                         </Animatable.View> :

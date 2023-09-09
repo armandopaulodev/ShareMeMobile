@@ -47,7 +47,7 @@ const DataTableComponent = () => {
   }, [itemsPerPage]);
 
   return (
-    <View style={{ marginBottom:3, marginTop:20 }}>
+    <View style={{ marginBottom:3, marginTop:0 }}>
       <View style={{ flexDirection:'row', justifyContent:'space-between', marginBottom: 4 }}>
       <Text style={{ fontWeight: 'bold', color: theme.colors.secondary }}>
         Seus uploads recentes

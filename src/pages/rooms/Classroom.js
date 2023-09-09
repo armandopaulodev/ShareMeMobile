@@ -22,7 +22,7 @@ export default function Classroom({ navigation }) {
 
             <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={2} direction="alternate">
                 <Image
-                    source={require('../../../assets/photos/empty.jpg')}
+                    source={require('../../../assets/photos/empty.png')}
                     style={{ width: 400, height: 400, alignSelf: 'center', top: 70 }}
                 />
             </Animatable.View>

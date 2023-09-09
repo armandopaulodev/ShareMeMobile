@@ -126,7 +126,7 @@ export default function Conversor({ navigation }) {
                 converting ? '' :
                     <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={2} direction="alternate">
                         <Image
-                            source={require('../../../assets/photos/wortopdf.jpg')}
+                            source={require('../../../assets/photos/wortopdf.png')}
                             style={{ width: 400, height: 400, alignSelf: 'center', top: 70 }}
                         />
                     </Animatable.View>
