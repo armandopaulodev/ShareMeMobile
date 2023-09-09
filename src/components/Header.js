@@ -31,8 +31,9 @@ export default function Header({ navigation, route, options, back }) {
       <Appbar.Content title={title} color="white"/>
       {
         !back? (
-          <Appbar.Action
+          <Appbar.Action 
           icon={isDarkTheme ? "moon-waning-crescent" : "white-balance-sunny"}
+          iconColor="white"
           onPress={toggleThemeType}
         />
         ) : null
@@ -42,6 +43,7 @@ export default function Header({ navigation, route, options, back }) {
           onDismiss={closeMenu}
           anchor={
             <Appbar.Action
+            color="white"
               icon="dots-vertical"
               onPress={openMenu}
             />
