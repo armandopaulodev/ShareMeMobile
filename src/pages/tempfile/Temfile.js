@@ -90,7 +90,7 @@ export default function Tempfile({ navigation }) {
     }
     return (
         <SafeAreaView>
-            <View style={{ justifyContent: 'center', padding: 35, backgroundColor: 'white' }}>
+            <View style={{ justifyContent: 'center', padding: 35     }}>
                 <Searchbar
                     onChangeText={onChangeSearch}
                     value={searchQuery}

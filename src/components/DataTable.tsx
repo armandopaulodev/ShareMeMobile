@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { DataTable, Text, Button } from 'react-native-paper';
+import { DataTable, Text, Button, Card } from 'react-native-paper';
 import { useTheme } from '../context/ThemeContext';
 import { View } from 'react-native';
 
 const DataTableComponent = () => {
   const [page, setPage] = React.useState<number>(0);
-  const [numberOfItemsPerPageList] = React.useState([2, 3, 4]);
+  const [numberOfItemsPerPageList] = React.useState([4]);
   const [itemsPerPage, onItemsPerPageChange] = React.useState(
     numberOfItemsPerPageList[0]
   );
@@ -47,20 +47,18 @@ const DataTableComponent = () => {
   }, [itemsPerPage]);
 
   return (
-    <View style={{ marginBottom:3 }}>
+    <View style={{ marginBottom:3, marginLeft:7, marginRight:7}}>
       <View style={{ flexDirection:'row', justifyContent:'space-between', marginBottom: 4 }}>
       <Text style={{ fontWeight: 'bold', color: theme.colors.secondary }}>
         Seus uploads recentes
       </Text>
-      <Button icon="book-play-outline" mode="outlined" onPress={() => console.log('Pressed')}>
+      <Button icon="book-play-outline" mode="elevated" onPress={() => console.log('Pressed')}>
         Minhas Turmas
       </Button>
       </View>
-      <DataTable style={{
-        
-        borderWidth: 0.2, shadowColor: theme.colors.secondary,
-        borderColor: theme.colors.secondary, padding: 20, borderRadius: 5
-      }}>
+      <Card style={{ marginTop:5 }}>
+        <Card.Content>
+        <DataTable>
         <DataTable.Header>
           <DataTable.Title>Ficheiros</DataTable.Title>
           <DataTable.Title numeric>Data.Upload</DataTable.Title>
@@ -87,6 +85,8 @@ const DataTableComponent = () => {
           selectPageDropdownLabel={'Por pagina'}
         />
       </DataTable>
+        </Card.Content>
+      </Card>
     </View>
 
 

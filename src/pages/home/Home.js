@@ -87,9 +87,9 @@ export default function Home({ navigation }) {
 
                 </View>
             </ScrollView>
-             <View style={{ top:-200 }}>
+             <ScrollView style={{ top:-30 }}>
              <DataTableComponent />
-             </View>
+             </ScrollView>
         </View>
     );
 };
