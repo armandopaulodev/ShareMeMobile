@@ -1,6 +1,5 @@
 
 import * as DocumentPicker from 'expo-document-picker';
-import { FileText } from 'lucide-react-native';
 import React, { useEffect, useState } from "react";
 import { Image, SafeAreaView, Share, StyleSheet, TouchableOpacity, View } from "react-native";
 import * as Animatable from 'react-native-animatable';
@@ -112,7 +111,6 @@ export default function Tempfile({ navigation }) {
                             renderItem={({ item }) => (
                                 <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate" style={[styles2.itemContainer, { backgroundColor: '#cbd5e1' }]}>
                                     <TouchableOpacity onPress={() => ShareFile(item.url)} onLongPress={() => ShareFile(item.url)}>
-                                        <FileText size={65} color={'#f472b6'} />
                                         <Text style={styles2.itemName}>{item.name}</Text>
                                         <Text style={styles2.itemCode}>{item.id}</Text>
                                     </TouchableOpacity>
@@ -166,7 +164,6 @@ export default function Tempfile({ navigation }) {
                 </Portal>
 
             </View>
-
         </SafeAreaView>
     );
 };
@@ -202,6 +199,6 @@ const fabStyle = StyleSheet.create({
         margin: 16,
         right: 0,
         bottom: 0,
-        backgroundColor: '#f472b6'
+        backgroundColor: '#f87171'
     },
 })

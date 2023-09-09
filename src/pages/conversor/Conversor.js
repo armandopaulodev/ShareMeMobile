@@ -1,6 +1,5 @@
 
 import * as DocumentPicker from 'expo-document-picker';
-import { Camera, FileArchive } from 'lucide-react-native';
 import React, { useState, useEffect, useRef } from "react";
 import { View, Image } from "react-native";
 import { Fold, Wave } from 'react-native-animated-spinkit';
@@ -104,7 +103,7 @@ export default function Conversor({ navigation }) {
             {pickedDocument && (
                 <View style={{ marginTop: 10, justifyContent: 'space-between' }}>
                     <Text style={{ fontWeight: 'bold' }}>
-                        <FileArchive color={'#8b5cf6'} size={48} />
+                        {/* icon */}
                         {pickedDocument.name}
                     </Text>
 
@@ -114,7 +113,7 @@ export default function Conversor({ navigation }) {
             {
                 converting ? <>
                     <Text style={{ textAlign: 'center', marginTop: 100 }} onPress={toggleThemeType}>
-                        <Wave size={200} color={'#8b5cf6'} />
+                        <Wave size={200} color={'#f87171'} />
                     </Text>
                     <Text style={{ textAlign: 'center', marginTop: 20 }} onPress={toggleThemeType}>
                         Convertendo! Por favor Aguarde...
