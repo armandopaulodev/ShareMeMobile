@@ -53,6 +53,7 @@ class AuthService {
             }),
           });
     
+          console.log(JSON.stringify(response))
           if (response.status === 200) {
             const data = await response.json();
             this.setAuthToken(data.token);
