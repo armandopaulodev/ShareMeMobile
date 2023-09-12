@@ -52,7 +52,7 @@ export default function Conversor({ navigation }) {
                             setConverting(false) //stop spinner
                             FileSystem.downloadAsync(
                                 response.data.url,
-                                FileSystem.documentDirectory + 'small.pdf'
+                                FileSystem.documentDirectory + 'convertido.pdf'
                             )
                                 .then(({ uri }) => {
                                     console.log('Finished downloading to ', uri);
