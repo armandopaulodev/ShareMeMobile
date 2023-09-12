@@ -8,6 +8,7 @@ import { Button, Dialog, Modal, Portal, Text, TextInput, Searchbar, FAB } from "
 import { FlatGrid } from 'react-native-super-grid';
 import { useTheme } from "../../context/ThemeContext";
 import TempFileService from "../../services/tempfiles/TempFileService";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function Tempfile({ navigation }) {
     const { toggleThemeType, themeType, isDarkTheme, theme } = useTheme();
@@ -89,7 +90,7 @@ export default function Tempfile({ navigation }) {
     }
     return (
         <SafeAreaView>
-            <View style={{ justifyContent: 'center', padding: 35     }}>
+            <View style={{ justifyContent: 'center', padding: 35 }}>
                 <Searchbar
                     onChangeText={onChangeSearch}
                     value={searchQuery}
@@ -110,12 +111,11 @@ export default function Tempfile({ navigation }) {
                             spacing={5}
                             renderItem={({ item }) => (
                                 <TouchableOpacity onPress={() => ShareFile(item.url)} onLongPress={() => ShareFile(item.url)}>
-                                <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate" style={[styles2.itemContainer, { backgroundColor: '#cbd5e1' }]}>
-                                    
+                                    <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate" style={[styles2.itemContainer, { backgroundColor: '#cbd5e1' }]}>
+                                        <MaterialIcons name="attach-file" size={40} color="#44403c" />
                                         <Text style={styles2.itemName}>{item.name}</Text>
                                         <Text style={styles2.itemCode}>{item.id}</Text>
-                                   
-                                </Animatable.View>
+                                    </Animatable.View>
                                 </TouchableOpacity>
                             )}
                         />
@@ -135,12 +135,12 @@ export default function Tempfile({ navigation }) {
                 </Portal>
                 <Portal>
                     <Modal visible={visibleModal} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-                    <Text style={{ textAlign: 'center'}}>
-                      Conectando o servidor
-                    </Text>
-                    <Text style={{ textAlign: 'center'}}>
-                        <Wander size={50} color={'#f472b6'} />
-                    </Text>
+                        <Text style={{ textAlign: 'center' }}>
+                            Conectando o servidor
+                        </Text>
+                        <Text style={{ textAlign: 'center' }}>
+                            <Wander size={50} color={'#f472b6'} />
+                        </Text>
                     </Modal>
                 </Portal>
                 <Portal>
