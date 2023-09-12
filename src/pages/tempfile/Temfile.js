@@ -109,12 +109,14 @@ export default function Tempfile({ navigation }) {
                             style={styles2.gridView}
                             spacing={5}
                             renderItem={({ item }) => (
+                                <TouchableOpacity onPress={() => ShareFile(item.url)} onLongPress={() => ShareFile(item.url)}>
                                 <Animatable.View animation='pulse' easing={'ease-in-out-quad'} iterationCount={3} direction="alternate" style={[styles2.itemContainer, { backgroundColor: '#cbd5e1' }]}>
-                                    <TouchableOpacity onPress={() => ShareFile(item.url)} onLongPress={() => ShareFile(item.url)}>
+                                    
                                         <Text style={styles2.itemName}>{item.name}</Text>
                                         <Text style={styles2.itemCode}>{item.id}</Text>
-                                    </TouchableOpacity>
+                                   
                                 </Animatable.View>
+                                </TouchableOpacity>
                             )}
                         />
 
