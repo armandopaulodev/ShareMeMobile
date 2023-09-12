@@ -35,6 +35,20 @@ class RoomsService {
 
   }
 
+  static async getRoom() {
+    try {
+      const response = await fetch(base_url + 'api/get/room', {
+        method: 'GET',
+      }).then(res => res.json());
+
+      return response;
+    } catch (error) {
+      console.error('Error storing token:', error);
+    }
+
+
+  }
+
 
 }
 
