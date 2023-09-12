@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AUTH_TOKEN_KEY = 'auth_token';
-const base_url = 'http://192.168.205.187:8001/';
+const base_url = 'http://192.168.6.187:8001/';
 
 class AuthService {
     // Function to set the user's JWT token in storage
