@@ -52,13 +52,13 @@ export default function Header({ navigation, route, options, back }) {
             onPress={() => {
               console.log('Option 1 was pressed');
             }}
-            title="Option 1"
+            title="Nome aqui"
           />
           <Menu.Item
             onPress={() => {
-              console.log('Option 2 was pressed');
+              toggleThemeType()
             }}
-            title="Option 2"
+            title="Alterar modo"
           />
           <Menu.Item
             onPress={() => {
