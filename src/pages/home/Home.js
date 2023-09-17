@@ -7,15 +7,12 @@ import OutNowNew from "../../components/OutNowNew";
 import { useTheme } from "../../context/ThemeContext";
 import { TouchableOpacity } from "react-native-gesture-handler";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
+import { Actionsheet, ActionsheetBackdrop, ActionsheetDragIndicator, ActionsheetContent, ActionsheetDragIndicatorWrapper } from '@gluestack-ui/themed';
 
 export default function Home({ navigation }) {
 
-    const [visible, setVisible] = React.useState(false);
-
-    const showDialog = () => setVisible(true);
-
-    const hideDialog = () => setVisible(false);
-    const { toggleThemeType, themeType, isDarkTheme, theme } = useTheme();
+    const [showActionsheet, setShowActionsheet] = React.useState(true)
+    const handleClose = () => setShowActionsheet(!showActionsheet)
 
 
     const newsData = [
@@ -30,7 +27,7 @@ export default function Home({ navigation }) {
             description: 'Description of news article 2.',
             author: 'Jane Smith',
             imageUrl: require('../../../assets/photos/wortopdf.png'),
-        },  {
+        }, {
             title: 'News Title 3',
             description: 'Description of news article 2.',
             author: 'Jane Smith',
@@ -47,20 +44,22 @@ export default function Home({ navigation }) {
 
     const NewsCard = ({ title, description, author, imageUrl }) => {
         return (
-          <TouchableOpacity 
-          style={{ backgroundColor:'#fff' }}
-          >
-            <View style={styles.card}>
-            <Image source={imageUrl} style={styles.image} />
-            <View style={styles.textContainer}>
-              <Text style={styles.title}>{title}</Text>
-              <Text style={styles.description}>{description}</Text>
-              <Text style={styles.author}>Author: {author}</Text>
-            </View>
-          </View>
-          </TouchableOpacity>
+            <TouchableOpacity
+                style={{ backgroundColor: '#fff' }}
+                onPress={handleClose}
+            >
+                <View style={styles.card}>
+                    <Image source={imageUrl} style={styles.image} />
+                    <View style={styles.textContainer}>
+                        <Text style={styles.title}>{title}</Text>
+                        <Text style={styles.description}>{description}</Text>
+                        <Text style={styles.author}>Author: {author}</Text>
+                    </View>
+                </View>
+            </TouchableOpacity>
         );
-      };
+    };
+
     return (
         <View style={{ flex: 1, padding: 5, marginLeft: 2 }}>
             <CategoryComponent />
@@ -83,6 +82,15 @@ export default function Home({ navigation }) {
                 )}
                 style={styles.container}
             />
+
+            <Actionsheet isOpen={true} onClose={handleClose}>
+                <ActionsheetBackdrop />
+                <ActionsheetContent maxHeight="75%">
+                    <ActionsheetDragIndicatorWrapper>
+                        <ActionsheetDragIndicator />
+                    </ActionsheetDragIndicatorWrapper>
+                </ActionsheetContent>
+            </Actionsheet>
         </View>
     );
 };
