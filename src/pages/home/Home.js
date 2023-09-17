@@ -1,8 +1,11 @@
 import React from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Avatar, Card, Divider } from "react-native-paper";
-import { useTheme } from "../../context/ThemeContext";
+import { Text, View, FlatList, StyleSheet, Image } from 'react-native';
+import { Avatar, Divider } from "react-native-paper";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import CategoryComponent from "../../components/CategoryComponent";
+import OutNowNew from "../../components/OutNowNew";
+import { useTheme } from "../../context/ThemeContext";
+import { TouchableOpacity } from "react-native-gesture-handler";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 export default function Home({ navigation }) {
@@ -15,102 +18,112 @@ export default function Home({ navigation }) {
     const { toggleThemeType, themeType, isDarkTheme, theme } = useTheme();
 
 
-    const renderItem = ({ item }) => (
-        <View style={{ width: '50%', marginBottom: 20 }}>
-            <Text>{item.title}</Text>
-        </View>
-    );
+    const newsData = [
+        {
+            title: 'News Title 1',
+            description: 'Description of news article 1.',
+            author: 'John Doe',
+            imageUrl: require('../../../assets/photos/temp.png'),
+        },
+        {
+            title: 'News Title 2',
+            description: 'Description of news article 2.',
+            author: 'Jane Smith',
+            imageUrl: require('../../../assets/photos/wortopdf.png'),
+        },  {
+            title: 'News Title 3',
+            description: 'Description of news article 2.',
+            author: 'Jane Smith',
+            imageUrl: require('../../../assets/photos/wortopdf.png'),
+        },
+        {
+            title: 'News Title 4',
+            description: 'Description of news article 2.',
+            author: 'Jane Smith',
+            imageUrl: require('../../../assets/photos/wortopdf.png'),
+        },
 
+    ];
 
-
+    const NewsCard = ({ title, description, author, imageUrl }) => {
+        return (
+          <TouchableOpacity 
+          style={{ backgroundColor:'#fff' }}
+          >
+            <View style={styles.card}>
+            <Image source={imageUrl} style={styles.image} />
+            <View style={styles.textContainer}>
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.description}>{description}</Text>
+              <Text style={styles.author}>Author: {author}</Text>
+            </View>
+          </View>
+          </TouchableOpacity>
+        );
+      };
     return (
         <View style={{ flex: 1, padding: 5, marginLeft: 2 }}>
             <CategoryComponent />
-            <View>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ flexDirection: 'row', paddingBottom: 25, columnGap: 12 }}>
-                    <View key={1} >
-                        <Card onPress={() => navigation.navigate('Ficheiro Temporario')} collapsable={true} style={styles.carouselItem}>
-                            <Card.Content>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Image
-                                        source={require('../../../assets/photos/temp.png')}
-                                        style={{ width: 170, height: 145, alignSelf: 'center', top: -14 }}
-                                    />
-                                    <View style={{ marginLeft: -20 }}>
-                                        <Text style={styles.carouselText}>Uploader</Text>
-                                        <Text style={styles.carouselSubtitle}>Gerar e compartilhar</Text>
-                                        <Text style={styles.carouselSubtitle}>Ficheiros temporarios</Text>
-                                    </View>
-
-                                </View>
-                            </Card.Content>
-
-                        </Card>
-
-                    </View>
-                    <View key={2} >
-                        <Card onPress={() => navigation.navigate('Nova Turma')} collapsable={true} style={styles.carouselItem}>
-                            <Card.Content>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Image
-                                        source={require('../../../assets/photos/empty.png')}
-                                        style={{ width: 170, height: 145, alignSelf: 'center', top: -14 }}
-                                    />
-                                    <View style={{ marginLeft: -20 }}>
-                                        <Text style={styles.carouselText}>Crie turmas</Text>
-                                        <Text style={styles.carouselSubtitle}>Melhore a sua experiencia</Text>
-                                        <Text style={styles.carouselSubtitle}>colaborando em grupo</Text>
-                                    </View>
-
-                                </View>
-                            </Card.Content>
-
-                        </Card>
-
-                    </View>
-                    <View key={3} >
-                        <Card onPress={() => navigation.navigate('Conversor')} collapsable={true} style={styles.carouselItem}>
-                            <Card.Content>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Image
-                                        source={require('../../../assets/photos/wortopdf.png')}
-                                        style={{ width: 170, height: 145, alignSelf: 'center', top: -14 }}
-                                    />
-                                    <View style={{ marginLeft: -20 }}>
-                                        <Text style={styles.carouselText}>Conversor</Text>
-                                        <Text style={styles.carouselSubtitle}>Converta ficheiros gratis</Text>
-                                        <Text style={styles.carouselSubtitle}>docx para pdf</Text>
-                                    </View>
-
-                                </View>
-                            </Card.Content>
-
-                        </Card>
-
-                    </View>
-                </ScrollView>
+            <OutNowNew />
+            <View style={{ paddingBottom: 10, marginLeft: 5 }}>
+                <Ionicons name="newspaper-outline" />
+                <Text style={{ fontWeight: '200', fontSize: 16 }}>Actualizacoes</Text>
             </View>
             <Divider />
-
+            <FlatList
+                data={newsData}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => (
+                    <NewsCard
+                        title={item.title}
+                        description={item.description}
+                        author={item.author}
+                        imageUrl={item.imageUrl}
+                    />
+                )}
+                style={styles.container}
+            />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    carouselItem: {
-        width: 340, // Set the width of each item
-        height: 150, // Set the height of each item
-        marginHorizontal: 10,
-        borderRadius: 20,
+    container: {
+        flex: 1,
+        padding: 16,
     },
-    carouselText: {
-        fontSize: 24,
+    card: {
+        backgroundColor: 'white',
+        borderRadius: 8,
+        marginBottom: 16,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
+        elevation: 3,
+        flexDirection: 'row',
+    },
+    image: {
+        width: 120,
+        height: 120,
+        borderTopLeftRadius: 8,
+        borderBottomLeftRadius: 8,
+    },
+    textContainer: {
+        flex: 1,
+        padding: 16,
+    },
+    title: {
+        fontSize: 18,
         fontWeight: 'bold',
-        marginRight: 10,
-        color: '#94a3b8'
     },
-    carouselSubtitle: {
+    description: {
         fontSize: 14,
-        color: '#94a3b8'
-    }
+        marginTop: 8,
+    },
+    author: {
+        fontSize: 12,
+        marginTop: 8,
+        color: 'gray',
+    },
 });
