@@ -31,13 +31,15 @@ export default function Header({ navigation, route, options, back }) {
     <View>
       <Appbar.Header>
       { back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title={<Text style={{ fontWeight:'bold', fontSize:30 }}>{title}</Text>}/>
+      <Appbar.Content title={<Text style={{ fontWeight:'400', fontSize:25 }}>{title}</Text>}/>
       {
         !back? (
          <View style={{ paddingRight: 10, border: 1, borderColor:'red', borderRadius:50 }}>
            <Ionicons name={'person-outline'} size={30} />
          </View>
-        ) : null
+        ) : <View style={{ paddingRight: 10, border: 1, borderColor:'red', borderRadius:50 }}>
+        <Ionicons name={'share-social-outline'} size={30} />
+      </View>
       }    
     </Appbar.Header>
     <Divider/>

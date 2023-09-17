@@ -16,7 +16,7 @@ export default function Home({ navigation }) {
 
     const newsData = [
         {
-            title: 'News Title 1',
+            title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,',
             description: 'Description of news article 1.',
             author: 'John Doe',
             imageUrl: require('../../../assets/photos/temp.png'),
