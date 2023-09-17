@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, FlatList, StyleSheet, Image } from 'react-native';
+import { Text, View, FlatList, StyleSheet, Image,Pressable } from 'react-native';
 import { Avatar, Divider } from "react-native-paper";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CategoryComponent from "../../components/CategoryComponent";
@@ -7,12 +7,11 @@ import OutNowNew from "../../components/OutNowNew";
 import { useTheme } from "../../context/ThemeContext";
 import { TouchableOpacity } from "react-native-gesture-handler";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
-import { Actionsheet, ActionsheetBackdrop, ActionsheetDragIndicator, ActionsheetContent, ActionsheetDragIndicatorWrapper } from '@gluestack-ui/themed';
+
 
 export default function Home({ navigation }) {
 
-    const [showActionsheet, setShowActionsheet] = React.useState(true)
-    const handleClose = () => setShowActionsheet(!showActionsheet)
+
 
 
     const newsData = [
@@ -42,21 +41,21 @@ export default function Home({ navigation }) {
 
     ];
 
-    const NewsCard = ({ title, description, author, imageUrl }) => {
+    const NewsCard = ({item}) => {
         return (
-            <TouchableOpacity
+            <Pressable
                 style={{ backgroundColor: '#fff' }}
-                onPress={handleClose}
+                onPress={() => navigation.navigate('Detalhes', item )}
             >
                 <View style={styles.card}>
-                    <Image source={imageUrl} style={styles.image} />
+                    <Image source={item.imageUrl} style={styles.image} />
                     <View style={styles.textContainer}>
-                        <Text style={styles.title}>{title}</Text>
-                        <Text style={styles.description}>{description}</Text>
-                        <Text style={styles.author}>Author: {author}</Text>
+                        <Text style={styles.title}>{item.title}</Text>
+                        <Text style={styles.description}>{item.description}</Text>
+                        <Text style={styles.author}>Author: {item.author}</Text>
                     </View>
                 </View>
-            </TouchableOpacity>
+            </Pressable>
         );
     };
 
@@ -74,23 +73,13 @@ export default function Home({ navigation }) {
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
                     <NewsCard
-                        title={item.title}
-                        description={item.description}
-                        author={item.author}
-                        imageUrl={item.imageUrl}
+                       item={item}
                     />
                 )}
                 style={styles.container}
             />
 
-            <Actionsheet isOpen={true} onClose={handleClose}>
-                <ActionsheetBackdrop />
-                <ActionsheetContent maxHeight="75%">
-                    <ActionsheetDragIndicatorWrapper>
-                        <ActionsheetDragIndicator />
-                    </ActionsheetDragIndicatorWrapper>
-                </ActionsheetContent>
-            </Actionsheet>
+            
         </View>
     );
 };
