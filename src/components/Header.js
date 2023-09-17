@@ -4,6 +4,7 @@ import { useTheme } from "../context/ThemeContext";
 import { getHeaderTitle } from '@react-navigation/elements';
 import AuthService from "../services/auth/AuthService";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 export default function Header({ navigation, route, options, back }) {
@@ -26,47 +27,15 @@ export default function Header({ navigation, route, options, back }) {
   }
 
   return (
-    <Appbar.Header style={{ backgroundColor: isDarkTheme? '':'#f87171' }}>
-      {title!=='ShareMe' && back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title={title} color="white"/>
+    <Appbar.Header>
+      { back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
+      <Appbar.Content title={<Text style={{ fontWeight:'bold', fontSize:30, fontFamily:'roboto' }}>{title}</Text>}/>
       {
         !back? (
-          <Appbar.Action 
-          icon={isDarkTheme ? "moon-waning-crescent" : "white-balance-sunny"}
-          iconColor="white"
-          onPress={toggleThemeType}
-        />
+          <Ionicons name={'person-outline'} size={30} />
         ) : null
       }     
-        <Menu
-          visible={visible}
-          onDismiss={closeMenu}
-          anchor={
-            <Appbar.Action
-            color="white"
-              icon="dots-vertical"
-              onPress={openMenu}
-            />
-          }>
-          <Menu.Item
-            onPress={() => {
-              console.log('Option 1 was pressed');
-            }}
-            title="Nome aqui"
-          />
-          <Menu.Item
-            onPress={() => {
-              toggleThemeType()
-            }}
-            title="Alterar modo"
-          />
-          <Menu.Item
-            onPress={() => {
-              logout()
-            }}
-            title={<Button icon="exit-to-app">Sair</Button>}
-          />
-        </Menu>
+   
 
     
     </Appbar.Header>
