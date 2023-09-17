@@ -1,10 +1,11 @@
 import React from "react";
-import { Appbar, Avatar, Menu, Text, Button } from "react-native-paper";
+import { Appbar, Avatar, Menu, Text, Button, Divider } from "react-native-paper";
 import { useTheme } from "../context/ThemeContext";
 import { getHeaderTitle } from '@react-navigation/elements';
 import AuthService from "../services/auth/AuthService";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { View } from "react-native";
 
 
 export default function Header({ navigation, route, options, back }) {
@@ -27,18 +28,20 @@ export default function Header({ navigation, route, options, back }) {
   }
 
   return (
-    <Appbar.Header>
+    <View>
+      <Appbar.Header>
       { back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title={<Text style={{ fontWeight:'bold', fontSize:30, fontFamily:'roboto' }}>{title}</Text>}/>
+      <Appbar.Content title={<Text style={{ fontWeight:'bold', fontSize:30 }}>{title}</Text>}/>
       {
         !back? (
-          <Ionicons name={'person-outline'} size={30} />
+         <View style={{ paddingRight: 10, border: 1, borderColor:'red', borderRadius:50 }}>
+           <Ionicons name={'person-outline'} size={30} />
+         </View>
         ) : null
-      }     
-   
-
-    
+      }    
     </Appbar.Header>
+    <Divider/>
+    </View>
   );
 };
 

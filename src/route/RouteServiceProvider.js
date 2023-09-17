@@ -11,19 +11,13 @@ const Stack = createStackNavigator();
 
 export default function RouteServiceProvider() {
 
-
-
-
-
     return (
 
         <Stack.Navigator screenOptions={{
             header: (props) => <Header {...props}/>
         }}>
            
-
-            <Stack.Screen name="Noticias" component={Home} />
-
+        <Stack.Screen name="Noticias" component={Home} />
 
         </Stack.Navigator>
     );
