@@ -9,7 +9,7 @@ export default function OutNowNew({ navigation, dataSource }) {
             {
                 reversedArray?.map((item, index) => (
 
-                    <Pressable onPress={() => navigation.navigate('Detalhes', item)}>
+                    <Pressable onPress={() => navigation.navigate('Detalhes', item)} key={index}>
                         <View style={styles.card} key={index}>
                             <Image source={{ uri: item.urlToImage }} style={styles.image} />
                             <View style={styles.overlay}>
