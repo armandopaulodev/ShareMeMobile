@@ -1,21 +1,24 @@
 import React from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Avatar } from "react-native-paper";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
-export default function OutNowNew({ dataSource }) {
+export default function OutNowNew({ navigation, dataSource }) {
     const reversedArray = dataSource?.slice().reverse();
     return (<View>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ flexDirection: 'row', paddingBottom: 25, columnGap: 12 }}>
             {
                 reversedArray?.map((item, index) => (
-                    <View style={styles.card} key={index}>
-                        <Image source={{ uri: item.urlToImage }} style={styles.image} />
-                        <View style={styles.overlay}>
-                            <Text style={styles.overlayText}>{item.title}</Text>
+
+                    <Pressable onPress={() => navigation.navigate('Detalhes', item)}>
+                        <View style={styles.card} key={index}>
+                            <Image source={{ uri: item.urlToImage }} style={styles.image} />
+                            <View style={styles.overlay}>
+                                <Text style={styles.overlayText}>{item.title}</Text>
+
+                            </View>
 
                         </View>
-
-                    </View>
+                    </Pressable>
                 ))
             }
 

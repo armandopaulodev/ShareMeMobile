@@ -76,7 +76,7 @@ export default function Home({ navigation }) {
     return (
         <View style={{ flex: 1, padding: 5, marginLeft: 2 }}>
             <CategoryComponent />
-            <OutNowNew dataSource={dataSource} />
+            <OutNowNew dataSource={dataSource} navigation={navigation}/>
             <View style={{ paddingBottom: 10, marginLeft: 5 }}>
                 <Ionicons name="newspaper-outline" />
                 <Text style={{ fontWeight: '200', fontSize: 16 }}>Actualizacoes</Text>
