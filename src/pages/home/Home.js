@@ -1,58 +1,72 @@
-import React from "react";
-import { Text, View, FlatList, StyleSheet, Image,Pressable } from 'react-native';
+import React, { useEffect, useState } from "react";
+import { Text, View, FlatList, StyleSheet, Image, Pressable } from 'react-native';
 import { Avatar, Divider } from "react-native-paper";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CategoryComponent from "../../components/CategoryComponent";
 import OutNowNew from "../../components/OutNowNew";
 import { useTheme } from "../../context/ThemeContext";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import NewsApiService from "../../services/api-service/NewsApiService";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
+const newsData = [
+    {
+        title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,',
+        description: 'Description of news article 1.',
+        author: 'John Doe',
+        imageUrl: require('../../../assets/photos/temp.png'),
+    },
+    {
+        title: 'News Title 2',
+        description: 'Description of news article 2.kkkkkkkkkkkkkkkk',
+        author: 'Jane Smith',
+        imageUrl: require('../../../assets/photos/wortopdf.png'),
+    }, {
+        title: 'News Title 3',
+        description: 'Description of news article 2.',
+        author: 'Jane Smith',
+        imageUrl: require('../../../assets/photos/wortopdf.png'),
+    },
+    {
+        title: 'News Title 4',
+        description: 'Description of news article 2.',
+        author: 'Jane Smith',
+        imageUrl: require('../../../assets/photos/wortopdf.png'),
+    },
 
+];
 export default function Home({ navigation }) {
 
+    const [dataSource, setDataSource] = useState();
+    const delay = ms => new Promise(
+        resolve => setTimeout(resolve, ms)
+    );
+
+    useEffect(() => {
+        getNews();
+    }, []);
+
+    const getNews = async () => {
+
+        const response = await NewsApiService.getNews();    
+        if (response.status==="ok") {
+            setDataSource(response.articles)
+        }
+    }
 
 
-
-    const newsData = [
-        {
-            title: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,',
-            description: 'Description of news article 1.',
-            author: 'John Doe',
-            imageUrl: require('../../../assets/photos/temp.png'),
-        },
-        {
-            title: 'News Title 2',
-            description: 'Description of news article 2.kkkkkkkkkkkkkkkk',
-            author: 'Jane Smith',
-            imageUrl: require('../../../assets/photos/wortopdf.png'),
-        }, {
-            title: 'News Title 3',
-            description: 'Description of news article 2.',
-            author: 'Jane Smith',
-            imageUrl: require('../../../assets/photos/wortopdf.png'),
-        },
-        {
-            title: 'News Title 4',
-            description: 'Description of news article 2.',
-            author: 'Jane Smith',
-            imageUrl: require('../../../assets/photos/wortopdf.png'),
-        },
-
-    ];
-
-    const NewsCard = ({item}) => {
+    const NewsCard = ({ item }) => {
         return (
             <Pressable
                 style={{ backgroundColor: '#fff' }}
-                onPress={() => navigation.navigate('Detalhes', item )}
+                onPress={() => navigation.navigate('Detalhes', item)}
             >
                 <View style={styles.card}>
-                    <Image source={item.imageUrl} style={styles.image} />
+                    <Image source={{ uri: item.urlToImage }} style={styles.image} />
                     <View style={styles.textContainer}>
                         <Text style={styles.title}>{item.title}</Text>
                         <Text style={styles.description}>{item.description}</Text>
-                        <Text style={styles.author}>Author: {item.author}</Text>
+                        <Text style={styles.author}>Autor: {item.author}</Text>
                     </View>
                 </View>
             </Pressable>
@@ -69,17 +83,17 @@ export default function Home({ navigation }) {
             </View>
             <Divider />
             <FlatList
-                data={newsData}
+                data={dataSource}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
                     <NewsCard
-                       item={item}
+                        item={item}
                     />
                 )}
                 style={styles.container}
             />
 
-            
+
         </View>
     );
 };

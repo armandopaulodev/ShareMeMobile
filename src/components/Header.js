@@ -2,7 +2,6 @@ import React from "react";
 import { Appbar, Avatar, Menu, Text, Button, Divider } from "react-native-paper";
 import { useTheme } from "../context/ThemeContext";
 import { getHeaderTitle } from '@react-navigation/elements';
-import AuthService from "../services/auth/AuthService";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { View } from "react-native";
