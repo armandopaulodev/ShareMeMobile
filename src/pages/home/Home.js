@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, FlatList, StyleSheet, Image, Pressable } from 'react-native';
+import { Text, View, FlatList, StyleSheet, Image, Pressable, ActivityIndicator } from 'react-native';
 import { Avatar, Divider } from "react-native-paper";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CategoryComponent from "../../components/CategoryComponent";
@@ -38,6 +38,7 @@ const newsData = [
 export default function Home({ navigation }) {
 
     const [dataSource, setDataSource] = useState();
+    const [spinner, setSpinner]=useState(false);
     const delay = ms => new Promise(
         resolve => setTimeout(resolve, ms)
     );
@@ -47,10 +48,11 @@ export default function Home({ navigation }) {
     }, []);
 
     const getNews = async () => {
-
+        setSpinner(true);
         const response = await NewsApiService.getNews();    
         if (response.status==="ok") {
             setDataSource(response.articles)
+            setSpinner(false);
         }
     }
 
@@ -75,6 +77,9 @@ export default function Home({ navigation }) {
 
     return (
         <View style={{ flex: 1, padding: 5, marginLeft: 2 }}>
+           {
+                spinner?  <ActivityIndicator animating={true} color={'red'} size={50}/>:''
+           }
             <CategoryComponent />
             <OutNowNew dataSource={dataSource} navigation={navigation}/>
             <View style={{ paddingBottom: 10, marginLeft: 5 }}>
