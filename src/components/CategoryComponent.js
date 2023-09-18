@@ -13,7 +13,7 @@ export default function CategoryComponent() {
                             source={require('../../assets/photos/temp.png')}
                             style={{ width: 50, height: 55, alignSelf: 'center', padding: 3 }}
                         />
-                        <Text style={{fontWeight:'100'}}>Politica</Text>
+                        <Text style={{fontWeight:'100', fontSize:9}}>Politica</Text>
                     </View>
                 </View>
                 <View key={2} style={{ borderColor: '#94a3b8', borderWidth: 1.5, borderRadius: 100, width: 50, height: 50 }}>
@@ -22,7 +22,7 @@ export default function CategoryComponent() {
                             source={require('../../assets/photos/temp.png')}
                             style={{ width: 50, height: 55, alignSelf: 'center', padding: 3 }}
                         />
-                         <Text style={{fontWeight:'100'}}>Politica</Text>
+                         <Text style={{fontWeight:'100', fontSize:9}}>Religiao</Text>
                     </View>
                 </View>
                 <View key={3} style={{ borderColor: '#94a3b8', borderWidth: 1.5, borderRadius: 100, width: 50, height: 50 }}>
@@ -31,7 +31,7 @@ export default function CategoryComponent() {
                             source={require('../../assets/photos/empty.png')}
                             style={{ width: 50, height: 55, alignSelf: 'center', padding: 3 }}
                         />
-                         <Text style={{fontWeight:'100'}}>Politica</Text>
+                         <Text style={{fontWeight:'100', fontSize:9}}>Desporto</Text>
                     </View>
                 </View>
                 <View key={4} style={{ borderColor: '#94a3b8', borderWidth: 1.5, borderRadius: 100, width: 50, height: 50 }}>
@@ -40,7 +40,7 @@ export default function CategoryComponent() {
                             source={require('../../assets/photos/temp.png')}
                             style={{ width: 50, height: 55, alignSelf: 'center', padding: 3 }}
                         />
-                         <Text style={{fontWeight:'100'}}>Politica</Text>
+                         <Text style={{fontWeight:'100', fontSize:9}}>Tecnologia</Text>
                     </View>
                 </View>
                 <View key={5} style={{ borderColor: '#94a3b8', borderWidth: 1.5, borderRadius: 100, width: 50, height: 50 }}>
@@ -49,7 +49,7 @@ export default function CategoryComponent() {
                             source={require('../../assets/photos/empty.png')}
                             style={{ width: 50, height: 55, alignSelf: 'center', padding: 3 }}
                         />
-                         <Text style={{fontWeight:'100'}}>Politica</Text>
+                         <Text style={{fontWeight:'100', fontSize:9}}>Politica</Text>
                     </View>
                 </View>
                 <View key={6} style={{ borderColor: '#94a3b8', borderWidth: 1.5, borderRadius: 100, width: 50, height: 50 }}>
@@ -58,7 +58,7 @@ export default function CategoryComponent() {
                             source={require('../../assets/photos/temp.png')}
                             style={{ width: 50, height: 55, alignSelf: 'center', padding: 3 }}
                         />
-                         <Text style={{fontWeight:'100'}}>Politica</Text>
+                         <Text style={{fontWeight:'100', fontSize:9}}>Politica</Text>
                     </View>
                 </View>
                 <View key={7} style={{ borderColor: '#94a3b8', borderWidth: 1.5, borderRadius: 100, width: 50, height: 50 }}>
@@ -67,7 +67,7 @@ export default function CategoryComponent() {
                             source={require('../../assets/photos/empty.png')}
                             style={{ width: 50, height: 55, alignSelf: 'center', padding: 3 }}
                         />
-                         <Text style={{fontWeight:'100'}}>Politica</Text>
+                         <Text style={{fontWeight:'100', fontSize:9}}>Politica</Text>
                     </View>
                 </View>
             </ScrollView>

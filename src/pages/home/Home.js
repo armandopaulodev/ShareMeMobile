@@ -23,7 +23,7 @@ export default function Home({ navigation }) {
         },
         {
             title: 'News Title 2',
-            description: 'Description of news article 2.',
+            description: 'Description of news article 2.kkkkkkkkkkkkkkkk',
             author: 'Jane Smith',
             imageUrl: require('../../../assets/photos/wortopdf.png'),
         }, {
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 18,
-        fontWeight: 'bold',
+        fontWeight: '400',
     },
     description: {
         fontSize: 14,
