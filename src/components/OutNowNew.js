@@ -3,17 +3,18 @@ import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Avatar } from "react-native-paper";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 export default function OutNowNew({ dataSource }) {
-
+    const reversedArray = dataSource?.slice().reverse();
     return (<View>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ flexDirection: 'row', paddingBottom: 25, columnGap: 12 }}>
             {
-                dataSource?.map((item, index) => (
+                reversedArray?.map((item, index) => (
                     <View style={styles.card} key={index}>
-                        <Image source={{ uri:item.urlToImage }} style={styles.image} />
+                        <Image source={{ uri: item.urlToImage }} style={styles.image} />
                         <View style={styles.overlay}>
-                            <Text style={styles.overlayText}>tittddddd</Text>
+                            <Text style={styles.overlayText}>{item.title}</Text>
+
                         </View>
-                        <Text style={styles.description}>des</Text>
+
                     </View>
                 ))
             }
@@ -44,8 +45,7 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: 200,
-        borderTopLeftRadius: 8,
-        borderTopRightRadius: 8,
+        borderRadius: 15
     },
     overlay: {
         position: 'absolute',
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.3)', // Adjust the opacity or color as needed
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 20,
+        borderRadius: 15,
     },
     overlayText: {
         color: 'white',
