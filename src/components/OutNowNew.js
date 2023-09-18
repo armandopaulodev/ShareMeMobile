@@ -2,24 +2,23 @@ import React from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Avatar } from "react-native-paper";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
-export default function OutNowNew() {
+export default function OutNowNew({ dataSource }) {
 
     return (<View>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ flexDirection: 'row', paddingBottom: 25, columnGap: 12 }}>
-            <View style={styles.card} key={1}>
-                <Image source={require('../../assets/photos/temp.png')} style={styles.image} />
-                <View style={styles.overlay}>
-                    <Text style={styles.overlayText}>tittddddd</Text>
-                </View>
-                <Text style={styles.description}>des</Text>
-            </View>
-            <View style={styles.card} key={2}>
-                <Image source={require('../../assets/photos/wortopdf.png')} style={styles.image} />
-                <View style={styles.overlay}>
-                    <Text style={styles.overlayText}>tittddddd</Text>
-                </View>
-                <Text style={styles.description}>des</Text>
-            </View>
+            {
+                dataSource?.map((item, index) => (
+                    <View style={styles.card} key={index}>
+                        <Image source={{ uri:item.urlToImage }} style={styles.image} />
+                        <View style={styles.overlay}>
+                            <Text style={styles.overlayText}>tittddddd</Text>
+                        </View>
+                        <Text style={styles.description}>des</Text>
+                    </View>
+                ))
+            }
+
+
         </ScrollView>
     </View>)
 }

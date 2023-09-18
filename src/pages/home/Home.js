@@ -64,8 +64,8 @@ export default function Home({ navigation }) {
                 <View style={styles.card}>
                     <Image source={{ uri: item.urlToImage }} style={styles.image} />
                     <View style={styles.textContainer}>
-                        <Text style={styles.title}>{item.title}</Text>
-                        <Text style={styles.description}>{item.description}</Text>
+                        <Text style={styles.title}>{item.title.substring(0, 41)}</Text>
+                        <Text style={styles.description}>{item.description.substring(0, 40)}</Text>
                         <Text style={styles.author}>Autor: {item.author}</Text>
                     </View>
                 </View>
@@ -76,7 +76,7 @@ export default function Home({ navigation }) {
     return (
         <View style={{ flex: 1, padding: 5, marginLeft: 2 }}>
             <CategoryComponent />
-            <OutNowNew />
+            <OutNowNew dataSource={dataSource} />
             <View style={{ paddingBottom: 10, marginLeft: 5 }}>
                 <Ionicons name="newspaper-outline" />
                 <Text style={{ fontWeight: '200', fontSize: 16 }}>Actualizacoes</Text>
@@ -125,16 +125,16 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     title: {
-        fontSize: 18,
+        fontSize: 15,
         fontWeight: '400',
     },
     description: {
-        fontSize: 14,
+        fontSize: 10,
         marginTop: 8,
     },
     author: {
         fontSize: 12,
-        marginTop: 8,
+        marginTop: 7,
         color: 'gray',
     },
 });
